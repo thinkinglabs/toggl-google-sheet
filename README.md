@@ -22,4 +22,6 @@ Fill a date of the month you want to import in cell B1. So if you want your time
 
 In addition it also calculates the number of meal vouchers you are entitled to receive for that month (which is a Belgian invention to lower personal income taxes).
 
+## Acknowledgment
+Credits go to [koen-github](https://github.com/koen-github) which provided an example on how to use the Toggl API with Google Sheet.
 
