@@ -1,13 +1,16 @@
+var SHT_CONFIG = 'Config';
+
 function onOpen() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var menuEntries = [ {name: "Get Timesheet for Month", functionName: "action"}                  ];
   ss.addMenu("Toggl", menuEntries);
 }
 
-
 function action() {
   
-  var startDate = SpreadsheetApp.getActiveSheet().getRange(1,2).getValue();
+  var config = loadConfiguration(SpreadsheetApp.getActive(), SHT_CONFIG);
+  
+  var startDate = config.timesheetDate;
   var since = Utilities.formatDate(startDate, "GMT+01:00", "yyyy-MM-dd");
   
   Logger.log("start date: " + since);
@@ -17,15 +20,15 @@ function action() {
   Logger.log("end date: " + until);
   
   
-  var timesheet = fetchTimesheet(since, until);
+  var timesheet = fetchTimesheet(config.apiToken, config.workspaceId, since, until);
   createTimesheet(startDate, timesheet);
 }
 
-function fetchTimesheet(since, until) {
+function fetchTimesheet(apiToken, workspaceId, since, until) {
   
   var timesheet = [];
   
-  var report = fetchReport(since, until);
+  var report = fetchReport(apiToken, workspaceId, since, until);
   Logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
   var numberOfPages = Math.ceil(report.total_count/ report.per_page);
   Logger.log("number of pages: " + numberOfPages);
@@ -53,7 +56,7 @@ function fetchTimesheet(since, until) {
     }
     
     ++page;
-    report = fetchReport(since, until, page);
+    report = fetchReport(apiToken, workspaceId, since, until, page);
   } while (page <= numberOfPages);
   
   return timesheet;
@@ -69,7 +72,7 @@ function createTimesheet(startDate, timesheet) {
     activeSpreadsheet.deleteSheet(sheet);
   }
   
-  var sheet = activeSpreadsheet.insertSheet(sheetName);
+  var sheet = activeSpreadsheet.insertSheet(sheetName, activeSpreadsheet.getSheets().length);
   
   var titles = sheet.getRange(1, 1, 1, 3);
   titles.setValues([["Date", "Customer", "Duration"]]);
@@ -111,4 +114,28 @@ function createTimesheet(startDate, timesheet) {
   sheet.autoResizeColumn(3);
   sheet.autoResizeColumn(5);
 }
+
+// based on the blog post "Insider Tips for using Apps Script and Spreadsheets"
+// from the Google Apps Developer Blog 
+// http://googleappsdeveloper.blogspot.be/2012/05/insider-tips-for-using-apps-script-and.html
+function loadConfiguration(wb, configSheet) {
+  
+  Logger.log("Loading configuration ...");
+    
+  var configsheet = wb.getSheetByName(configSheet);
+  var result = new Array();
+
+  var cfgdata = configsheet.getDataRange().getValues();
+  for (i = 1; i < cfgdata.length; i++) {
+    var key = cfgdata[i][0];
+    var value = cfgdata[i][1]; 
+    
+    Logger.log("key: " + key + " - value: " + value);
+    
+    result[key] = value; 
+  }
+  
+  return result
+}
+
 

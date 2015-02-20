@@ -1,10 +1,7 @@
 
-function fetchReport(since, until, page) {
+function fetchReport(apiToken, workspaceId, since, until, page) {
   
-  var workspaceId = ######; //replace by your workspace id  
-  var apiToken = "an api token"; //insert here your api token
-  
-  var usernamePassword = apiToken + ":api_token"; 
+  var usernamePassword = apiToken + ":api_token";
   var digest = "Basic " + Utilities.base64Encode(usernamePassword);
   
   
@@ -24,5 +21,4 @@ function fetchReport(since, until, page) {
   var result = Utilities.jsonParse(responseBody);
   return result;
 }
-
 
