@@ -5,6 +5,13 @@ This Google Apps script imports time entries from Toggl.com into a Google Sheet 
 For a given month it aggregates the time entries per day and per customer.
 
 ## Installation
+
+### Simple
+
+Open [this Google Sheet](https://docs.google.com/spreadsheets/d/1rXMdRwkMCeC2kq0yEMb54Y8SU2DUk-TFOJ0gxgBugEk/edit?usp=sharing) and make a copy in your Google Drive account.
+
+### From scratch
+
 Create a new Google Sheet.
 
 Create a new script in your newly created Google Sheet and paste the contents of the files `Code.gs`, `Dates.gs` and `Toggl.gs` in their respective script files.
