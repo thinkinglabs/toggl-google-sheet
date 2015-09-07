@@ -13,12 +13,14 @@ function action() {
   var timeZone = Session.getScriptTimeZone();
   Logger.log("script time zone: " + timeZone);
 
-  var startDate = config.timesheetDate;
-  Logger.log("start date: " + startDate);
+  var timesheetDate = config.timesheetDate;
+  Logger.log("start date: " + timesheetDate);
+  var startDate = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), 1);
   var since = Utilities.formatDate(startDate, timeZone, "yyyy-MM-dd");
-
   Logger.log("since: " + since);
+
   var days = daysOfMonth(startDate.getYear(), startDate.getMonth());
+
   var endDate = new Date(startDate.getYear(), startDate.getMonth(), days);
   Logger.log("end date: " + endDate);
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
