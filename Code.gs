@@ -2,11 +2,11 @@ var SHT_CONFIG = 'Config';
 
 function onOpen() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var menuEntries = [ {name: "Get Timesheet for Month", functionName: "action"}                  ];
+  var menuEntries = [ {name: "Get Timesheet for Month", functionName: "getTimesheetForMonth"} ];
   ss.addMenu("Toggl", menuEntries);
 }
 
-function action() {
+function getTimesheetForMonth() {
 
   var config = loadConfiguration(SpreadsheetApp.getActive(), SHT_CONFIG);
 
