@@ -6,6 +6,12 @@ function onOpen() {
   ss.addMenu("Toggl", menuEntries);
 }
 
+
+function FetchTimesheet() {
+}
+
+FetchTimesheet.prototype.execute = fetchTimesheet;
+
 function getTimesheetForMonth() {
 
   var config = loadConfiguration(SpreadsheetApp.getActive(), SHT_CONFIG);
@@ -26,8 +32,8 @@ function getTimesheetForMonth() {
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
   Logger.log("until: " + until);
 
-
-  var timesheet = fetchTimesheet(config.apiToken, config.workspaceId, since, until);
+  var fetchTimesheet = new FetchTimesheet();
+  var timesheet = fetchTimesheet.execute(config.apiToken, config.workspaceId, since, until);
   createTimesheet(startDate, timeZone, timesheet);
 }
 
