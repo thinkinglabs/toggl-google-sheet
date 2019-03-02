@@ -1,4 +1,10 @@
 
+function Toggl(apiToken) {
+  this.apiToken = apiToken;
+}
+
+Toggl.prototype.fetchReport = fetchReport;
+
 function fetchReport(apiToken, workspaceId, since, until, page) {
   
   var usernamePassword = apiToken + ":api_token";

@@ -35,7 +35,8 @@ function fetchTimesheet(apiToken, workspaceId, since, until) {
 
   var timesheet = [];
 
-  var report = fetchReport(apiToken, workspaceId, since, until);
+  var toggl = new Toggl();
+  var report = toggl.fetchReport(apiToken, workspaceId, since, until);
   Logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
   var numberOfPages = Math.ceil(report.total_count/ report.per_page);
   Logger.log("number of pages: " + numberOfPages);
