@@ -24,7 +24,6 @@ function fetchReport(apiToken, workspaceId, since, until, page) {
     }
   });
   var responseBody = response.getContentText();
-  var result = Utilities.jsonParse(responseBody);
+  var result = JSON.parse(responseBody);
   return result;
 }
-
