@@ -47,22 +47,22 @@ function fetchTimesheet(workspaceId, since, until) {
   for (var i = 0; i < report.length; i++) {
     var timeEntry = report[i];
     var client = timeEntry.client;
-    var start = timeEntry.startDate;
+    var startDate = timeEntry.startDate;
     var duration = timeEntry.duration;
 
-    if (!timesheet[start.getDate()]) {
-      Logger.log("add " + start.getDate() + " to timesheet");
-      timesheet[start.getDate()] = {};
+    if (!timesheet[startDate.getDate()]) {
+      Logger.log("add " + startDate.getDate() + " to timesheet");
+      timesheet[startDate.getDate()] = {};
     }
-    var timesheetDay = timesheet[start.getDate()];
+    var timesheetDay = timesheet[startDate.getDate()];
     if (!timesheetDay[client]) {
-      Logger.log("add " + client + " to timesheet day " + start.getDate());
+      Logger.log("add " + client + " to timesheet day " + startDate.getDate());
       timesheetDay[client] = duration;
     } else {
       timesheetDay[client] = timesheetDay[client] + duration;
     }
 
-    Logger.log(client + " ["+start.getDate()+"]: " + timesheetDay[client]);
+    Logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
   }
 
   return timesheet;
