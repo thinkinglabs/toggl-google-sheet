@@ -47,7 +47,7 @@ function fetchTimesheet(workspaceId, since, until) {
   for (var i = 0; i < report.length; i++) {
     var timeEntry = report[i];
     var client = timeEntry.client;
-    var start = timeEntry.start;
+    var start = timeEntry.startDate;
     var duration = timeEntry.duration;
 
     if (!timesheet[start.getDate()]) {

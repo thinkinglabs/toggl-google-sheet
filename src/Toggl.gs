@@ -1,3 +1,8 @@
+function TimeEntry(client, startDate, duration) {
+  this.client = client;
+  this.startDate = startDate;
+  this.duration = duration;
+}
 
 function TogglRepository(apiToken) {
   this.apiToken = apiToken;
@@ -22,11 +27,7 @@ function detailedReport(workspaceId, since, until) {
     for (var i = 0; i < report.data.length; i++) {
       var timeEntry = report.data[i];
 
-      result.push({
-        client: timeEntry.client,
-        start: parseISODateTime(timeEntry.start),
-        duration: timeEntry.dur
-      });
+      result.push(new TimeEntry(timeEntry.client, parseISODateTime(timeEntry.start), timeEntry.dur));
     }
 
     ++page;
