@@ -43,35 +43,27 @@ function fetchTimesheet(workspaceId, since, until) {
   var timesheet = [];
 
   var report = this.togglRepository.detailedReport(workspaceId, since, until);
-  Logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
-  var numberOfPages = Math.ceil(report.total_count/ report.per_page);
-  Logger.log("number of pages: " + numberOfPages);
-  var page = 1;
-  do {
-    for (var i = 0; i < report.data.length; i++) {
-      var timeEntry = report.data[i];
-      var client = timeEntry.client;
-      var start = parseISODateTime(timeEntry.start);
-      var duration = timeEntry.dur;
 
-      if (!timesheet[start.getDate()]) {
-        Logger.log("add " + start.getDate() + " to timesheet");
-        timesheet[start.getDate()] = {};
-      }
-      var timesheetDay = timesheet[start.getDate()];
-      if (!timesheetDay[client]) {
-        Logger.log("add " + client + " to timesheet day " + start.getDate());
-        timesheetDay[client] = duration;
-      } else {
-        timesheetDay[client] = timesheetDay[client] + duration;
-      }
+  for (var i = 0; i < report.length; i++) {
+    var timeEntry = report[i];
+    var client = timeEntry.client;
+    var start = timeEntry.start;
+    var duration = timeEntry.duration;
 
-      Logger.log(client + " ["+start.getDate()+"]: " + timesheetDay[client]);
+    if (!timesheet[start.getDate()]) {
+      Logger.log("add " + start.getDate() + " to timesheet");
+      timesheet[start.getDate()] = {};
+    }
+    var timesheetDay = timesheet[start.getDate()];
+    if (!timesheetDay[client]) {
+      Logger.log("add " + client + " to timesheet day " + start.getDate());
+      timesheetDay[client] = duration;
+    } else {
+      timesheetDay[client] = timesheetDay[client] + duration;
     }
 
-    ++page;
-    report = this.togglRepository.detailedReport(workspaceId, since, until, page);
-  } while (page <= numberOfPages);
+    Logger.log(client + " ["+start.getDate()+"]: " + timesheetDay[client]);
+  }
 
   return timesheet;
 }
