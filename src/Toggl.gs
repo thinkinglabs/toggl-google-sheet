@@ -5,9 +5,9 @@ function TogglRepository(apiToken) {
 
 TogglRepository.prototype.detailedReport = detailedReport;
 
-function detailedReport(apiToken, workspaceId, since, until, page) {
+function detailedReport(workspaceId, since, until, page) {
   
-  var usernamePassword = apiToken + ":api_token";
+  var usernamePassword = this.apiToken + ":api_token";
   var digest = "Basic " + Utilities.base64Encode(usernamePassword);
   
   

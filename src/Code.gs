@@ -33,16 +33,16 @@ function getTimesheetForMonth() {
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
   Logger.log("until: " + until);
 
-  var fetchTimesheet = new FetchTimesheet(new TogglRepository());
-  var timesheet = fetchTimesheet.execute(config.apiToken, config.workspaceId, since, until);
+  var fetchTimesheet = new FetchTimesheet(new TogglRepository(config.apiToken));
+  var timesheet = fetchTimesheet.execute(config.workspaceId, since, until);
   createTimesheet(startDate, timeZone, timesheet);
 }
 
-function fetchTimesheet(apiToken, workspaceId, since, until) {
+function fetchTimesheet(workspaceId, since, until) {
 
   var timesheet = [];
 
-  var report = this.togglRepository.detailedReport(apiToken, workspaceId, since, until);
+  var report = this.togglRepository.detailedReport(workspaceId, since, until);
   Logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
   var numberOfPages = Math.ceil(report.total_count/ report.per_page);
   Logger.log("number of pages: " + numberOfPages);
@@ -70,7 +70,7 @@ function fetchTimesheet(apiToken, workspaceId, since, until) {
     }
 
     ++page;
-    report = this.togglRepository.detailedReport(apiToken, workspaceId, since, until, page);
+    report = this.togglRepository.detailedReport(workspaceId, since, until, page);
   } while (page <= numberOfPages);
 
   return timesheet;
