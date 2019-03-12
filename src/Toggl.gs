@@ -1,11 +1,11 @@
 
-function Toggl(apiToken) {
+function TogglRepository(apiToken) {
   this.apiToken = apiToken;
 }
 
-Toggl.prototype.fetchReport = fetchReport;
+TogglRepository.prototype.detailedReport = detailedReport;
 
-function fetchReport(apiToken, workspaceId, since, until, page) {
+function detailedReport(apiToken, workspaceId, since, until, page) {
   
   var usernamePassword = apiToken + ":api_token";
   var digest = "Basic " + Utilities.base64Encode(usernamePassword);
