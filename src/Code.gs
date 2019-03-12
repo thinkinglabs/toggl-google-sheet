@@ -7,7 +7,8 @@ function onOpen() {
 }
 
 
-function FetchTimesheet(togglRepository) {
+function FetchTimesheet(logger, togglRepository) {
+  this.logger = logger;
   this.togglRepository = togglRepository;
 }
 
@@ -33,7 +34,7 @@ function getTimesheetForMonth() {
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
   Logger.log("until: " + until);
 
-  var fetchTimesheet = new FetchTimesheet(new TogglRepository(config.apiToken));
+  var fetchTimesheet = new FetchTimesheet(new Logging('FetchTimesheet'), new TogglRepository(config.apiToken));
   var timesheet = fetchTimesheet.execute(config.workspaceId, since, until);
   createTimesheet(startDate, timeZone, timesheet);
 }
@@ -51,18 +52,18 @@ function fetchTimesheet(workspaceId, since, until) {
     var duration = timeEntry.duration;
 
     if (!timesheet[startDate.getDate()]) {
-      Logger.log("add " + startDate.getDate() + " to timesheet");
+      this.logger.log("add " + startDate.getDate() + " to timesheet");
       timesheet[startDate.getDate()] = {};
     }
     var timesheetDay = timesheet[startDate.getDate()];
     if (!timesheetDay[client]) {
-      Logger.log("add " + client + " to timesheet day " + startDate.getDate());
+      this.logger.log("add " + client + " to timesheet day " + startDate.getDate());
       timesheetDay[client] = duration;
     } else {
       timesheetDay[client] = timesheetDay[client] + duration;
     }
 
-    Logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
+    this.logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
   }
 
   return timesheet;
