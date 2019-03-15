@@ -144,3 +144,4 @@ QUnit.test("FetchTimesheet.execute - one client on two days multiple entries", f
 
   assert.deepEqual(actual, expected, 'Passed!')
 });
+

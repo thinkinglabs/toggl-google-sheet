@@ -1,0 +1,26 @@
+{
+  "name": "toggl-google-sheet",
+  "version": "1.0.0",
+  "description": "This Google Apps script imports time entries from Toggl.com into a Google Sheet using their [Detailed Report API](https://github.com/toggl/toggl_api_docs/blob/master/reports/detailed.md).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "node-qunit-phantomjs": "^2.0.1"
+  },
+  "scripts": {
+    "test": "node-qunit-phantomjs ./test/fixture.html --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdpauw/toggl-google-sheet.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tdpauw/toggl-google-sheet/issues"
+  },
+  "homepage": "https://github.com/tdpauw/toggl-google-sheet#readme"
+}
