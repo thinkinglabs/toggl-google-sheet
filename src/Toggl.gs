@@ -50,9 +50,7 @@ function TogglRepository(apiToken, requests, base64, logger) {
       queryString = queryString + "&page=" + page;
     }
     that.logger.log("querystring: " + queryString);
-    var response = that.requests.get(url, queryString, { 'Authorization': digest });
-    var responseBody = response.getContentText();
-    var result = JSON.parse(responseBody);
+    var result = that.requests.get(url, queryString, { 'Authorization': digest });
     return result;
   }
 }

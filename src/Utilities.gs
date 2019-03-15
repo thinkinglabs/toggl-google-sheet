@@ -1,10 +1,14 @@
 
 function Requests() {
   this.get = function(url, queryString, headers) {
-    return UrlFetchApp.fetch(url + "?" + queryString, {
+    var response = UrlFetchApp.fetch(url + "?" + queryString, {
       method: "get",
       headers: headers
     });
+
+    var responseBody = response.getContentText();
+    var result = JSON.parse(responseBody);
+    return result;
   }
 }
 
