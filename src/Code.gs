@@ -34,7 +34,10 @@ function getTimesheetForMonth() {
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
   Logger.log("until: " + until);
 
-  var fetchTimesheet = new FetchTimesheet(new Logging('FetchTimesheet'), new TogglRepository(config.apiToken));
+  var fetchTimesheet = new FetchTimesheet(
+    new Logging('FetchTimesheet'), 
+    new TogglRepository(config.apiToken, new Logging('TogglRepository'))
+  );
   var timesheet = fetchTimesheet.execute(config.workspaceId, since, until);
   createTimesheet(startDate, timeZone, timesheet);
 }

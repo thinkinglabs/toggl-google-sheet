@@ -4,8 +4,9 @@ function TimeEntry(client, startDate, duration) {
   this.duration = duration;
 }
 
-function TogglRepository(apiToken) {
+function TogglRepository(apiToken, logger) {
   this.apiToken = apiToken;
+  this.logger = logger;
 }
 
 TogglRepository.prototype.detailedReport = detailedReport;
@@ -17,9 +18,9 @@ function detailedReport(workspaceId, since, until) {
 
   var report = this.report(workspaceId, since, until);
 
-  Logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
+  this.logger.log("total count: " + report.total_count + " - per page: " + report.per_page);
   var numberOfPages = Math.ceil(report.total_count/ report.per_page);
-  Logger.log("number of pages: " + numberOfPages);
+  this.logger.log("number of pages: " + numberOfPages);
   
   var page = 1;
   
@@ -48,7 +49,7 @@ function report(workspaceId, since, until, page) {
   if (page) {
     queryString = queryString + "&page=" + page;
   }
-  Logger.log("querystring: " + queryString);
+  this.logger.log("querystring: " + queryString);
   var response = UrlFetchApp.fetch(url + "?" + queryString, {
     method: "get",
     headers: {
