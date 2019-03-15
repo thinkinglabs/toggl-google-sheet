@@ -50,12 +50,13 @@ function report(workspaceId, since, until, page) {
     queryString = queryString + "&page=" + page;
   }
   this.logger.log("querystring: " + queryString);
-  var response = UrlFetchApp.fetch(url + "?" + queryString, {
-    method: "get",
-    headers: {
-      "Authorization": digest
-    }
-  });
+  var response = new Resource(url).get(queryString, { 'Authorization': digest });
+  // var response = UrlFetchApp.fetch(url + "?" + queryString, {
+  //   method: "get",
+  //   headers: {
+  //     "Authorization": digest
+  //   }
+  // });
   var responseBody = response.getContentText();
   var result = JSON.parse(responseBody);
   return result;
