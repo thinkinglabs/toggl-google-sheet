@@ -48,3 +48,21 @@ QUnit.test("ToggleRepository.detailedReport pagination", function( assert ) {
 
 });
 
+function MockToggleRepository(result) {
+  this.detailedReport = function(workspaceId, since, until) {
+    return result;
+  }
+}
+
+QUnit.test("FetchTimesheet.execute one client on one day", function( assert ) {
+
+  var fetchTimesheet = new FetchTimesheet(new MockLogger(), new MockToggleRepository([
+    new TimeEntry('aClient', new Date(2019, 2, 1, 10, 2), 5)
+  ]));
+
+  var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+  var expected = [];
+  expected[1] = {'aClient': 5};
+
+  assert.deepEqual(actual, expected, 'Passed!')
+});
