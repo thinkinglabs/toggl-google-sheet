@@ -71,12 +71,27 @@ QUnit.test("FetchTimesheet.execute two clients on one day", function( assert ) {
 
   var fetchTimesheet = new FetchTimesheet(new MockLogger(), new MockToggleRepository([
     new TimeEntry('clientA', new Date(2019, 2, 1, 10, 2), 5),
-    new TimeEntry('clientB', new Date(2019, 2, 1, 10, 2), 6)
+    new TimeEntry('clientB', new Date(2019, 2, 1, 9, 5), 6)
   ]));
 
   var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
   var expected = [];
   expected[1] = {'clientA': 5, 'clientB': 6};
+
+  assert.deepEqual(actual, expected, 'Passed!')
+});
+
+QUnit.test("FetchTimesheet.execute one client on two days", function( assert ) {
+
+  var fetchTimesheet = new FetchTimesheet(new MockLogger(), new MockToggleRepository([
+    new TimeEntry('aClient', new Date(2019, 2, 1, 10, 2), 5),
+    new TimeEntry('aClient', new Date(2019, 2, 3, 9, 5), 6)
+  ]));
+
+  var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+  var expected = [];
+  expected[1] = {'aClient': 5 };
+  expected[3] = {'aClient': 6 };
 
   assert.deepEqual(actual, expected, 'Passed!')
 });
