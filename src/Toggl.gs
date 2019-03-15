@@ -4,9 +4,10 @@ function TimeEntry(client, startDate, duration) {
   this.duration = duration;
 }
 
-function TogglRepository(apiToken, requests, logger) {
+function TogglRepository(apiToken, requests, base64, logger) {
   this.apiToken = apiToken;
   this.requests = requests;
+  this.base64 = base64;
   this.logger = logger;
 
   var that = this;
@@ -40,7 +41,7 @@ function TogglRepository(apiToken, requests, logger) {
   function fetchReport(workspaceId, since, until, page) {
   
     var usernamePassword = that.apiToken + ":api_token";
-    var digest = "Basic " + Utilities.base64Encode(usernamePassword);
+    var digest = "Basic " + that.base64.encode(usernamePassword);
     
     
     var url = "https://www.toggl.com/reports/api/v2/details";
