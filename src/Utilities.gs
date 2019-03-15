@@ -1,9 +1,7 @@
 
-function Resource(url) {
-  this.url = url;
-
-  this.get = function(queryString, headers) {
-    return UrlFetchApp.fetch(this.url + "?" + queryString, {
+function Requests() {
+  this.get = function(url, queryString, headers) {
+    return UrlFetchApp.fetch(url + "?" + queryString, {
       method: "get",
       headers: headers
     });

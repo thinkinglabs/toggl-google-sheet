@@ -4,8 +4,9 @@ function TimeEntry(client, startDate, duration) {
   this.duration = duration;
 }
 
-function TogglRepository(apiToken, logger) {
+function TogglRepository(apiToken, requests, logger) {
   this.apiToken = apiToken;
+  this.requests = requests;
   this.logger = logger;
 }
 
@@ -50,13 +51,7 @@ function report(workspaceId, since, until, page) {
     queryString = queryString + "&page=" + page;
   }
   this.logger.log("querystring: " + queryString);
-  var response = new Resource(url).get(queryString, { 'Authorization': digest });
-  // var response = UrlFetchApp.fetch(url + "?" + queryString, {
-  //   method: "get",
-  //   headers: {
-  //     "Authorization": digest
-  //   }
-  // });
+  var response = this.requests.get(url, queryString, { 'Authorization': digest });
   var responseBody = response.getContentText();
   var result = JSON.parse(responseBody);
   return result;
