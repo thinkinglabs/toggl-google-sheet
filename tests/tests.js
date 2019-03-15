@@ -8,22 +8,22 @@ QUnit.test('parseISODateTime', function( assert ) {
   assert.deepEqual(actual, expected, 'Passed!');
 });
 
+function MockRequests(result) {
+  this.get = function(url, queryString, headers) {
+    return result;
+  };
+}
+
+function MockLogger() {
+  this.log = function() {};
+}
+
+function MockBase64() {
+  this.encode = function(text) { return text; };
+}
+
 QUnit.test("ToggleRepository.detailedReport pagination", function( assert ) {
   var apiToken = 12345;
-
-  function MockRequests(result) {
-    this.get = function(url, queryString, headers) {
-      return result;
-    };
-  }
-  
-  function MockLogger() {
-    this.log = function() {};
-  }
-  
-  function MockBase64() {
-    this.encode = function(text) { return text; };
-  }
 
   var togglRepository = new TogglRepository(apiToken, new MockRequests({
     total_count: 3,
@@ -47,3 +47,4 @@ QUnit.test("ToggleRepository.detailedReport pagination", function( assert ) {
   assert.deepEqual(actual, expected, 'Passed!');
 
 });
+
