@@ -18,12 +18,21 @@ Create a new script in your newly created Google Sheet and paste the contents of
 
 Edit `Toggl.gs` to fill in your *workspace_id* and *api_token*.
 
+Rename the first sheet as _Config_ and add the following information in cell A1:
+
+| |A: Variable   |B: Value                 | C: Description     |
+|-|--------------|-------------------------|--------------------|
+|1|timesheetDate | 01/01/2015              | Timesheet Month    |
+|2|workspaceId   | _workspaceId_           | Toggl Workspace Id |
+|3|apiToken      | _your toggle api token_ | Toggl API Token    |
+
 To figure out your *workspace_id*: go to Team in toggl.com. The number at the end of the URL is the workspace id.
 
 To figure out your *api_token*: go to your Profile in toggl.com, your API token is at the bottom of the page.
 
 ## Usage
-After a reopen of your Google Sheet you will have a new menu open called "*Toggl*" with a sub-menu "*Get Timesheet for Month*". 
+
+Re-open your Google Sheet. Now you will have a new menu called "*Toggl*" with a sub-menu "*Get Timesheet for Month*". 
 
 Fill a date of the month you want to import in cell B1. So if you want your timesheet for December 2014, fill the date 01/12/2014 and click *Toggl > Get Timesheet for Month*.
 
