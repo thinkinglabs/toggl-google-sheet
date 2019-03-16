@@ -18,7 +18,9 @@ Create a new script in your newly created Google Sheet and paste the contents of
 
 Edit `Toggl.gs` to fill in your *workspace_id* and *api_token*.
 
-Rename the first sheet as _Config_ and add the following information in cell A1:
+Rename the first sheet as _Config_.
+
+Add the following information in cell A1 of the _Config_ sheet:
 
 | |A: Variable   |B: Value                 | C: Description     |
 |-|--------------|-------------------------|--------------------|
@@ -34,10 +36,24 @@ To figure out your *api_token*: go to your Profile in toggl.com, your API token 
 
 Re-open your Google Sheet. Now you will have a new menu called "*Toggl*" with a sub-menu "*Get Timesheet for Month*". 
 
-Fill a date of the month you want to import in cell B1. So if you want your timesheet for December 2014, fill the date 01/12/2014 and click *Toggl > Get Timesheet for Month*.
+Fill a date of the month you want to import in cell B1. If you want your timesheet for December 2014, fill the date 01/12/2014 and click *Toggl > Get Timesheet for Month*.
 
-In addition it also calculates the number of meal vouchers you are entitled to receive for that month (which is a Belgian invention to lower personal income taxes).
+It also calculates the number of days worked during that month.
+
+## Run tests
+
+To run the tests:
+
+```bash
+npm install
+npm test
+```
+
+Tests are implemented using [QUnit](https://qunitjs.com/). Apparently Google App Scripts only supports EcmaScript 5.
+Qunit seems to be the only test framework that still supports ES5.
+
+`test/fixture.html` loads all the code and test code. The tests are executed inside a headless PhantomJS browser.
 
 ## Acknowledgment
-Credits go to [koen-github](https://github.com/koen-github) which provided an example on how to use the Toggl API with Google Sheet.
 
+Credits go to [koen-github](https://github.com/koen-github) which provided an example on how to use the Toggl API with Google Sheet.
