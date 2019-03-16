@@ -1,7 +1,7 @@
 {
   "name": "toggl-google-sheet",
   "version": "1.0.0",
-  "description": "This Google Apps script imports time entries from Toggl.com into a Google Sheet using their [Detailed Report API](https://github.com/toggl/toggl_api_docs/blob/master/reports/detailed.md).",
+  "description": "This Google Apps Script imports time entries from Toggl.com into a Google Sheet using the [Detailed Report API](https://github.com/toggl/toggl_api_docs/blob/master/reports/detailed.md).",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -17,10 +17,12 @@
     "type": "git",
     "url": "git+https://github.com/tdpauw/toggl-google-sheet.git"
   },
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "[ThinkingLabs](http://thinkinglabs.io)",
+  "contributors": ["[Thierry de Pauw](https://twitter.com/tdpauw)"],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tdpauw/toggl-google-sheet/issues"
   },
-  "homepage": "https://github.com/tdpauw/toggl-google-sheet#readme"
+  "homepage": "https://github.com/tdpauw/toggl-google-sheet#readme",
+  "keywords": ["toggl", "google-sheets", "timesheet"]
 }
