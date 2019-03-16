@@ -26,66 +26,77 @@ function getTimesheetForMonth() {
   var until = Utilities.formatDate(endDate, timeZone, "yyyy-MM-dd");
   Logger.log("until: " + until);
 
-  var fetchTimesheet = new FetchTimesheet(
-    new Logging('FetchTimesheet'), 
-    new TogglRepository(config.apiToken, new Requests(), new Base64(), new Logging('TogglRepository'))
+  var renderer = new TimesheetRenderer(
+    timeZone, 
+    new FetchTimesheet(
+      new Logging('FetchTimesheet'), 
+      new TogglRepository(config.apiToken, new Requests(), new Base64(), new Logging('TogglRepository'))
+    )
   );
-  var timesheet = fetchTimesheet.execute(config.workspaceId, since, until);
-  createTimesheet(startDate, timeZone, timesheet);
+  renderer.render(config.workspaceId, startDate, since, until);
 }
 
-function createTimesheet(startDate, timeZone, timesheet) {
+function TimesheetRenderer(timeZone, fetchTimesheet) {
 
-  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetName = Utilities.formatDate(startDate, timeZone, "yyyyMM");
+  this.timeZone = timeZone;
+  this.fetchTimesheet = fetchTimesheet;
 
-  var sheet = activeSpreadsheet.getSheetByName(sheetName);
-  if (sheet) {
-    activeSpreadsheet.deleteSheet(sheet);
-  }
+  this.render = function(workspaceId, startDate, since, until) {
 
-  var sheet = activeSpreadsheet.insertSheet(sheetName, activeSpreadsheet.getSheets().length);
+    var timesheet = this.fetchTimesheet.execute(workspaceId, since, until);
 
-  var titles = sheet.getRange(1, 1, 1, 3);
-  titles.setValues([["Date", "Customer", "Duration"]]);
-  titles.setFontWeights([["bold", "bold", "bold"]]);
+    var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var sheetName = Utilities.formatDate(startDate, this.timeZone, "yyyyMM");
 
-  var mc = sheet.getRange(2, 5);
-  mc.setValue("#MC");
-  mc.setFontWeight("bold");
+    var sheet = activeSpreadsheet.getSheetByName(sheetName);
+    if (sheet) {
+      activeSpreadsheet.deleteSheet(sheet);
+    }
 
-  var numberOfMealVouchers = 0;
+    var sheet = activeSpreadsheet.insertSheet(sheetName, activeSpreadsheet.getSheets().length);
 
-  var row = 2
-  for (var i = 0; i < timesheet.length; i++) {
+    var titles = sheet.getRange(1, 1, 1, 3);
+    titles.setValues([["Date", "Customer", "Duration"]]);
+    titles.setFontWeights([["bold", "bold", "bold"]]);
 
-    var timesheetDay = timesheet[i];
-    var durationInHours = 0;
-    for (var property in timesheetDay) {
-      if (timesheetDay.hasOwnProperty(property)) {
-        var start = new Date(startDate.getYear(), startDate.getMonth(), i);
-        var client = property;
-        var duration = millisToDuration(timesheetDay[property]);
-        durationInHours = durationInHours + millisToDecimalHours(timesheetDay[property]);
+    var mc = sheet.getRange(2, 5);
+    mc.setValue("#MC");
+    mc.setFontWeight("bold");
 
-        sheet.getRange(row, 1, 1, 3).setValues([[start, client, duration]]);
-        sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
-        ++row;
+    var numberOfMealVouchers = 0;
+
+    var row = 2
+    for (var i = 0; i < timesheet.length; i++) {
+
+      var timesheetDay = timesheet[i];
+      var durationInHours = 0;
+      for (var property in timesheetDay) {
+        if (timesheetDay.hasOwnProperty(property)) {
+          var start = new Date(startDate.getYear(), startDate.getMonth(), i);
+          var client = property;
+          var duration = millisToDuration(timesheetDay[property]);
+          durationInHours = durationInHours + millisToDecimalHours(timesheetDay[property]);
+
+          sheet.getRange(row, 1, 1, 3).setValues([[start, client, duration]]);
+          sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+          ++row;
+        }
+      }
+
+      if (durationInHours >= 2) {
+        ++numberOfMealVouchers;
       }
     }
 
-    if (durationInHours >= 2) {
-      ++numberOfMealVouchers;
-    }
-  }
+    sheet.getRange(2,6).setValue(numberOfMealVouchers);
 
-  sheet.getRange(2,6).setValue(numberOfMealVouchers);
-
-  sheet.autoResizeColumn(1);
-  sheet.autoResizeColumn(2);
-  sheet.autoResizeColumn(3);
-  sheet.autoResizeColumn(5);
+    sheet.autoResizeColumn(1);
+    sheet.autoResizeColumn(2);
+    sheet.autoResizeColumn(3);
+    sheet.autoResizeColumn(5);
+  };
 }
+
 
 // based on the blog post "Insider Tips for using Apps Script and Spreadsheets"
 // from the Google Apps Developer Blog
