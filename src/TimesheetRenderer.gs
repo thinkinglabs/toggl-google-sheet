@@ -3,12 +3,12 @@ function TimesheetRenderer(fetchTimesheet) {
 
   this.fetchTimesheet = fetchTimesheet;
 
-  this.render = function(workspaceId, startDate, since, until) {
+  this.render = function(workspaceId, timesheetDate) {
 
-    var timesheet = this.fetchTimesheet.execute(workspaceId, since, until);
+    var timesheet = this.fetchTimesheet.execute(workspaceId, timesheetDate);
 
     var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sheetName = formatYYYYMM(startDate);
+    var sheetName = formatYYYYMM(timesheetDate);
 
     var sheet = activeSpreadsheet.getSheetByName(sheetName);
     if (sheet) {
@@ -34,7 +34,7 @@ function TimesheetRenderer(fetchTimesheet) {
       var durationInHours = 0;
       for (var property in timesheetDay) {
         if (timesheetDay.hasOwnProperty(property)) {
-          var start = new Date(startDate.getYear(), startDate.getMonth(), i);
+          var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
           var client = property;
           var duration = millisToDuration(timesheetDay[property]);
           durationInHours = durationInHours + millisToDecimalHours(timesheetDay[property]);

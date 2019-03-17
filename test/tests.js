@@ -181,7 +181,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('aClient', new Date(2019, 2, 1, 10, 2), 5)
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'aClient': 5};
   
@@ -196,7 +196,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('aClient', new Date(2019, 2, 1, 11, 21), 14)
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'aClient': 29};
   
@@ -210,7 +210,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('clientB', new Date(2019, 2, 1, 9, 5), 6)
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'clientA': 5, 'clientB': 6};
   
@@ -226,7 +226,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('clientB', new Date(2019, 2, 1, 10, 11), 11),
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'clientA': 15, 'clientB': 17};
   
@@ -240,7 +240,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('aClient', new Date(2019, 2, 3, 9, 5), 6)
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'aClient': 5 };
     expected[3] = {'aClient': 6 };
@@ -257,7 +257,7 @@ QUnit.module('FetchTimesheet', function() {
       new TimeEntry('aClient', new Date(2019, 2, 3, 12, 13), 8)
     ]));
   
-    var actual = fetchTimesheet.execute('aWorkspaceId', '2019-03-01', '2019-03-15');
+    var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
     var expected = [];
     expected[1] = {'aClient': 12 };
     expected[3] = {'aClient': 14 };

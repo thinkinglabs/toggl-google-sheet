@@ -3,7 +3,13 @@ function FetchTimesheet(logger, togglRepository) {
   this.logger = logger;
   this.togglRepository = togglRepository;
 
-  this.execute = function(workspaceId, since, until) {
+  this.execute = function(workspaceId, timesheetDate) {
+
+    var since = formatISODate(firstDayOfMonth(timesheetDate));
+    this.logger.log("since: " + since);
+
+    var until = formatISODate(lastDayOfMonth(timesheetDate));
+    this.logger.log("until: " + until);
 
     var timesheet = [];
   
