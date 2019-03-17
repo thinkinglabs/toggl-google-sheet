@@ -19,7 +19,7 @@ function getTimesheetForMonth() {
   var since = Utilities.formatDate(startDate, timeZone, "yyyy-MM-dd");
   Logger.log("since: " + since);
 
-  var days = daysOfMonth(startDate.getYear(), startDate.getMonth());
+  var days = daysInMonth(startDate.getYear(), startDate.getMonth());
 
   var endDate = new Date(startDate.getYear(), startDate.getMonth(), days);
   Logger.log("end date: " + endDate);

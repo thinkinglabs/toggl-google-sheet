@@ -1,6 +1,61 @@
 
 QUnit.module('Dates', function() {
 
+  QUnit.module('daysInMonth', function() {
+
+    QUnit.test('February 2016 is 29', function( assert ) {
+      assert.equal(daysInMonth(2016, 1), 29);
+    });
+
+    QUnit.test('January 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 0), 31);
+    });
+  
+    QUnit.test('February 2019 is 28', function( assert ) {
+      assert.equal(daysInMonth(2019, 1), 28);
+    });
+
+    QUnit.test('March 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 2), 31);
+    });
+
+    QUnit.test('April 2019 is 30', function( assert ) {
+      assert.equal(daysInMonth(2019, 3), 30);
+    });
+
+    QUnit.test('May 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 4), 31);
+    });
+
+    QUnit.test('June 2019 is 30', function( assert ) {
+      assert.equal(daysInMonth(2019, 5), 30);
+    });
+
+    QUnit.test('July 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 6), 31);
+    });
+
+    QUnit.test('August 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 7), 31);
+    });
+
+    QUnit.test('September 2019 is 30', function( assert ) {
+      assert.equal(daysInMonth(2019, 8), 30);
+    });
+
+    QUnit.test('October 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 9), 31);
+    });
+
+    QUnit.test('November 2019 is 30', function( assert ) {
+      assert.equal(daysInMonth(2019, 10), 30);
+    });
+
+    QUnit.test('December 2019 is 31', function( assert ) {
+      assert.equal(daysInMonth(2019, 11), 31);
+    });
+  });
+
   QUnit.test('parseISODateTime', function( assert ) {
     var actual = parseISODateTime('2019-03-15T10:20:03');
     var expected = new Date(2019, 2, 15, 10, 20, 3);
