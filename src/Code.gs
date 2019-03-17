@@ -1,4 +1,3 @@
-var SHT_CONFIG = 'Config';
 
 function onOpen() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -8,7 +7,8 @@ function onOpen() {
 
 function getTimesheetForMonth() {
 
-  var config = loadConfiguration(SpreadsheetApp.getActive(), SHT_CONFIG);
+  var readConfiguration = new ReadConfiguration(SpreadsheetApp.getActive(), new Logging('ConfigurationLoader'));
+  var config = readConfiguration.read();
 
   var timeZone = Session.getScriptTimeZone();
   Logger.log("script time zone: " + timeZone);
@@ -36,25 +36,34 @@ function getTimesheetForMonth() {
   renderer.render(config.workspaceId, startDate, since, until);
 }
 
-// based on the blog post "Insider Tips for using Apps Script and Spreadsheets"
-// from the Google Apps Developer Blog
-// http://googleappsdeveloper.blogspot.be/2012/05/insider-tips-for-using-apps-script-and.html
-function loadConfiguration(wb, configSheet) {
+function ReadConfiguration(spreadSheet, logger) {
+  this.spreadSheet = spreadSheet;
+  this.logger = logger
 
-  Logger.log("Loading configuration ...");
+  var SHT_CONFIG = 'Config';
 
-  var configsheet = wb.getSheetByName(configSheet);
-  var result = new Array();
+  // based on the blog post "Insider Tips for using Apps Script and Spreadsheets"
+  // from the Google Apps Developer Blog
+  // http://googleappsdeveloper.blogspot.be/2012/05/insider-tips-for-using-apps-script-and.html
+  this.read = function() {
 
-  var cfgdata = configsheet.getDataRange().getValues();
-  for (i = 1; i < cfgdata.length; i++) {
-    var key = cfgdata[i][0];
-    var value = cfgdata[i][1];
+    this.logger.log("Reading configuration ...");
 
-    Logger.log("key: " + key + " - value: " + value);
+    var configsheet = this.spreadSheet.getSheetByName(SHT_CONFIG);
+    var result = {};
 
-    result[key] = value;
-  }
+    var cfgdata = configsheet.getDataRange().getValues();
+    for (i = 1; i < cfgdata.length; i++) {
+      var key = cfgdata[i][0];
+      var value = cfgdata[i][1];
 
-  return result
+      this.logger.log("key: " + key + " - value: " + value);
+
+      result[key] = value;
+    }
+
+    return result
+  };
+
 }
+
