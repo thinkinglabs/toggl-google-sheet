@@ -82,6 +82,30 @@ QUnit.module('Dates', function() {
 
   });
 
+  QUnit.test('firstDayOfMonth', function ( assert ) {
+    assert.deepEqual(firstDayOfMonth(new Date(2019, 1, 27)), new Date(2019, 1, 1));
+  });
+
+  QUnit.module('lastDayOfMonth', function() {
+
+    QUnit.test('February 2016', function( assert ) {
+      assert.deepEqual(lastDayOfMonth(new Date(2016, 1, 15)), new Date(2016, 1, 29));
+    });
+
+    QUnit.test('January 2019', function( assert ) {
+      assert.deepEqual(lastDayOfMonth(new Date(2019, 0, 11)), new Date(2019, 0, 31));
+    });
+  
+    QUnit.test('February 2019 is 28', function( assert ) {
+      assert.deepEqual(lastDayOfMonth(new Date(2019, 1, 21)), new Date(2019, 1, 28));
+    });
+
+    QUnit.test('March 2019 is 31', function( assert ) {
+      assert.deepEqual(lastDayOfMonth(new Date(2019, 2, 3)), new Date(2019, 2, 31));
+    });
+
+  });
+
 });
 
 QUnit.module('Utilities', function() {

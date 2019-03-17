@@ -11,23 +11,19 @@ function getTimesheetForMonth() {
   var config = readConfiguration.read();
 
   var timesheetDate = config.timesheetDate;
-  Logger.log("start date: " + timesheetDate);
-  var startDate = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), 1);
-  var since = formatISODate(startDate);
+  Logger.log("timesheet date: " + timesheetDate);
+
+  var since = formatISODate(firstDayOfMonth(timesheetDate));
   Logger.log("since: " + since);
 
-  var days = daysInMonth(startDate.getYear(), startDate.getMonth());
-
-  var endDate = new Date(startDate.getYear(), startDate.getMonth(), days);
-  Logger.log("end date: " + endDate);
-  var until = formatISODate(endDate);
+  var until = formatISODate(lastDayOfMonth(timesheetDate));
   Logger.log("until: " + until);
-
+  
   var renderer = new TimesheetRenderer(
     new FetchTimesheet(
       new Logging('FetchTimesheet'), 
       new TogglRepository(config.apiToken, new Requests(), new Base64(), new Logging('TogglRepository'))
     )
   );
-  renderer.render(config.workspaceId, startDate, since, until);
+  renderer.render(config.workspaceId, timesheetDate, since, until);
 }

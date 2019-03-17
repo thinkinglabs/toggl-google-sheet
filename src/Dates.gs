@@ -1,3 +1,13 @@
+
+function firstDayOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+}
+
+function lastDayOfMonth(date) {
+  var days = daysInMonth(date.getFullYear(), date.getMonth());
+  return new Date(date.getFullYear(), date.getMonth(), days);
+}
+
 function daysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
