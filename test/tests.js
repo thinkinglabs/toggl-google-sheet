@@ -61,7 +61,39 @@ QUnit.module('Dates', function() {
     var expected = new Date(2019, 2, 15, 10, 20, 3);
     assert.deepEqual(actual, expected, 'Passed!');
   });
+
+  QUnit.module('formatISODate', function() {
+
+    QUnit.test('2019-03-17', function( assert ) {
+      assert.equal(formatISODate(new Date(2019, 2, 17)), '2019-03-17');
+    });
   
+    QUnit.test('2019-10-01', function( assert ) {
+      assert.equal(formatISODate(new Date(2019, 9, 1)), '2019-10-01');
+    });
+
+  });
+ 
+  QUnit.module('formatYYYYMM', function() {
+
+    QUnit.test('2019-03-17', function( assert ) {
+      assert.equal(formatYYYYMM(new Date(2019, 2, 17)), '201903');
+    });
+
+  });
+
+});
+
+QUnit.module('Utilities', function() {
+
+  QUnit.test('padStart - 5 -> 05', function( assert ) {
+    assert.equal(padStart(5, 2), '05');
+  });
+
+  QUnit.test('padStart - 31 -> 31', function( assert ) {
+    assert.equal(padStart(31, 2), '31');
+  });
+
 });
 
 QUnit.module('ToggleRepository', function() {

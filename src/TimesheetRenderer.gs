@@ -1,7 +1,6 @@
 
-function TimesheetRenderer(timeZone, fetchTimesheet) {
+function TimesheetRenderer(fetchTimesheet) {
 
-  this.timeZone = timeZone;
   this.fetchTimesheet = fetchTimesheet;
 
   this.render = function(workspaceId, startDate, since, until) {
@@ -9,7 +8,7 @@ function TimesheetRenderer(timeZone, fetchTimesheet) {
     var timesheet = this.fetchTimesheet.execute(workspaceId, since, until);
 
     var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-    var sheetName = Utilities.formatDate(startDate, this.timeZone, "yyyyMM");
+    var sheetName = formatYYYYMM(startDate);
 
     var sheet = activeSpreadsheet.getSheetByName(sheetName);
     if (sheet) {

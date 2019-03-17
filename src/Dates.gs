@@ -12,6 +12,14 @@ function millisToDecimalHours(millis) {
   return millis / 1000 / 60 / 60;
 }
 
+function formatISODate(date) {
+  return (padStart(date.getFullYear(), 4) + '-' + padStart(date.getMonth()+1, 2) + '-' + padStart(date.getDate(), 2));
+}
+
+function formatYYYYMM(date) {
+  return (padStart(date.getFullYear(), 4) + padStart(date.getMonth()+1, 2));
+}
+
 function parseISODateTime(isoDateTime) {
   try{
     var result = new Date();
@@ -44,3 +52,8 @@ function parseISODateTime(isoDateTime) {
   }
 }
 
+function padStart(str, targetLength, padchar) {
+  var pad_char = typeof padchar !== 'undefined' ? padchar : '0';
+  var pad = new Array(1 + targetLength).join(pad_char);
+  return (pad + str).slice(-pad.length);
+}
