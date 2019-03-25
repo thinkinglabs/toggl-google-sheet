@@ -19,18 +19,22 @@ function FetchTimesheet(logger, togglRepository) {
   
     for (var i = 0; i < report.length; i++) {
       var timeEntry = report[i];
-      var client = timeEntry.client;
-      var startDate = timeEntry.startDate;
-      var duration = timeEntry.duration;
-  
-      var timesheetDay = getOrCreateTimesheetDayEntry(timesheet, startDate);
-      addDurationToClient(timesheetDay, client, duration);
-  
-      this.logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
+      addTimeEntryToTimesheet(timesheet, timeEntry);  
     }
   
     return timesheet;
   };
+
+  function addTimeEntryToTimesheet(timesheet, timeEntry) {
+    var client = timeEntry.client;
+    var startDate = timeEntry.startDate;
+    var duration = timeEntry.duration;
+
+    var timesheetDay = getOrCreateTimesheetDayEntry(timesheet, startDate);
+    addDurationToClient(timesheetDay, client, duration);
+
+    that.logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
+  }
 
   function getOrCreateTimesheetDayEntry(timesheet, startDate) {
     if (!timesheet[startDate.getDate()]) {
