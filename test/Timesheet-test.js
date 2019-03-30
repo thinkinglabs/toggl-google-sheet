@@ -3,11 +3,23 @@ QUnit.module('Timesheet', function() {
 
   QUnit.module('TimesheetDateEntry', function() {
 
+    QUnit.test('new date entry has no clients', function(assert) {
+      var dateEntry = new TimesheetDayEntry();
+
+      assert.deepEqual(Object.keys(dateEntry), ['add'], 'Passed!');
+    });
+
+    QUnit.test('new date entry with one client duration', function(assert) {
+      var dateEntry = new TimesheetDayEntry({aClient:5});
+      
+      assert.equal(dateEntry['aClient'], 5, 'Passed!');
+    });
+
     QUnit.test('add client to empty date entry', function( assert ) {
-      var dateEntry = new TimesheetDayEntry(new Date(2019, 2, 18));
+      var dateEntry = new TimesheetDayEntry();
       dateEntry.add('aClient', 5);
 
-      assert.equal(dateEntry['aClient'], 5);    
+      assert.equal(dateEntry['aClient'], 5, 'Passed!');
     });
 
     // QUnit.test('add client to date entry with same client', function( assert ) {

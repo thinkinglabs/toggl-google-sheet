@@ -1,15 +1,24 @@
 
-function TimesheetDayEntry() {
+function TimesheetDayEntry(clients) {
+  var that = this;
+
+  if (clients) {
+    Object.keys(clients).forEach(function(key) {
+      var value = clients[key];
+      that[key] = value;
+    });
+  }
+
   this.add = function(client, duration) {
-    this[client] = duration;
+    that[client] = duration;
   }
 }
 
 function FetchTimesheet(logger, togglRepository) {
+  var that = this;
+
   this.logger = logger;
   this.togglRepository = togglRepository;
-
-  var that = this;
 
   this.execute = function(workspaceId, timesheetDate) {
 
