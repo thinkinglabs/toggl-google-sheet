@@ -1,4 +1,8 @@
 
+function TimesheetDayEntry() {
+
+}
+
 function FetchTimesheet(logger, togglRepository) {
   this.logger = logger;
   this.togglRepository = togglRepository;
@@ -39,7 +43,7 @@ function FetchTimesheet(logger, togglRepository) {
   function getOrCreateTimesheetDayEntry(timesheet, startDate) {
     if (!timesheet[startDate.getDate()]) {
       that.logger.log("add " + startDate.getDate() + " to timesheet");
-      timesheet[startDate.getDate()] = {};
+      timesheet[startDate.getDate()] = new TimesheetDayEntry();
     }
     var timesheetDay = timesheet[startDate.getDate()];
     return timesheetDay;
