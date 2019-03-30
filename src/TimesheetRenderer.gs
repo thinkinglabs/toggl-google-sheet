@@ -33,7 +33,7 @@ function TimesheetRenderer(fetchTimesheet) {
       var timesheetDay = timesheet[i];
       var durationInHours = 0;
       for (var property in timesheetDay) {
-        if (timesheetDay.hasOwnProperty(property)) {
+        if (timesheetDay.hasOwnProperty(property) && property !== 'add') {
           var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
           var client = property;
           var duration = millisToDuration(timesheetDay[property]);

@@ -1,6 +1,8 @@
 
 function TimesheetDayEntry() {
-
+  this.add = function(client, duration) {
+    this[client] = duration;
+  }
 }
 
 function FetchTimesheet(logger, togglRepository) {
@@ -52,9 +54,9 @@ function FetchTimesheet(logger, togglRepository) {
   function addDurationToClient(timesheetDay, client, duration) {
     if (!timesheetDay[client]) {
       that.logger.log("add " + client + " to timesheet day");
-      timesheetDay[client] = duration;
+      timesheetDay.add(client, duration);
     } else {
-      timesheetDay[client] = timesheetDay[client] + duration;
+      timesheetDay.add(client, timesheetDay[client] + duration);
     }
   }
 
