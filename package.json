@@ -8,7 +8,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "node-qunit-phantomjs": "^2.0.1"
+    "node-qunit-phantomjs": "^2.0.1",
+    "qunit": "^2.9.2"
   },
   "scripts": {
     "test": "node-qunit-phantomjs ./test/fixture.html --verbose"
@@ -18,11 +19,17 @@
     "url": "git+https://github.com/tdpauw/toggl-google-sheet.git"
   },
   "author": "[ThinkingLabs](http://thinkinglabs.io)",
-  "contributors": ["[Thierry de Pauw](https://twitter.com/tdpauw)"],
+  "contributors": [
+    "[Thierry de Pauw](https://twitter.com/tdpauw)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tdpauw/toggl-google-sheet/issues"
   },
   "homepage": "https://github.com/tdpauw/toggl-google-sheet#readme",
-  "keywords": ["toggl", "google-sheets", "timesheet"]
+  "keywords": [
+    "toggl",
+    "google-sheets",
+    "timesheet"
+  ]
 }
