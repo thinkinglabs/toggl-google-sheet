@@ -22,12 +22,12 @@ QUnit.module('Timesheet', function() {
       assert.equal(dateEntry['aClient'], 5, 'Passed!');
     });
 
-    // QUnit.test('add client to date entry with same client', function( assert ) {
-    //   var dateEntry = new TimesheetDayEntry(new Date(2019, 2, 18), { aClient: new TimesheetClientEntry('aClient', 7)});
-    //   dateEntry.add('aClient', 5);
+    QUnit.test('add client to date entry with existing client', function( assert ) {
+      var dateEntry = new TimesheetDayEntry({aClient:7});
+      dateEntry.add('aClient', 5);
 
-    //   assert.equal(dateEntry.durationFor('aClient'), 12);
-    // });
+      assert.equal(dateEntry['aClient'], 12, 'Passed!');
+    });
 
   });
 
