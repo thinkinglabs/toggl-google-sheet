@@ -10,11 +10,15 @@ function TimesheetDayEntry(clients) {
   }
 
   this.add = function(client, duration) {
-    if (that[client]) {
+    if (hasClient(client)) {
       that[client] = that[client] + duration;
     } else {
       that[client] = duration;
     }
+  }
+
+  function hasClient(client) {
+    return that[client];
   }
 }
 
