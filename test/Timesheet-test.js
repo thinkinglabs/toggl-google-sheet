@@ -53,12 +53,36 @@ QUnit.module('Timesheet', function() {
       assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
     });
 
-    QUnit.test('new timesheet add timesheet day entry', function( assert ) {
+    QUnit.test('new timesheet create timesheet day entry for given day of month', function( assert ) {
       var timesheet = new Timesheet();
 
       timesheet.create(2);
 
       assert.deepEqual(timesheet.timesheet(), [,,new TimesheetDayEntry()], 'Passed!');
+    });
+
+    QUnit.test('new timesheet get timesheet day entry for given day of month', function( assert ) {
+      var timesheet = new Timesheet([,,new TimesheetDayEntry({aClient:5})]);
+
+      var actual = timesheet.get(2);
+
+      assert.deepEqual(actual, new TimesheetDayEntry({aClient:5}), 'Passed!');
+    });
+
+    QUnit.test('hasDayOfMonth(1) should be true when create(1)', function( assert ) {
+      var timesheet = new Timesheet();
+
+      timesheet.create(1);
+
+      assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
+    });
+
+    QUnit.test('not hasDayOfMonth(1) should be false when create(1)', function( assert ) {
+      var timesheet = new Timesheet();
+
+      timesheet.create(1);
+
+      assert.notOk(!timesheet.hasDayOfMonth(1), 'Passed!');
     });
 
   });

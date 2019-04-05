@@ -12,6 +12,10 @@ function Timesheet(timesheet) {
     _timesheet[dayOfMonth] = new TimesheetDayEntry();
   };
 
+  this.get = function(dayOfMonth) {
+    return _timesheet[dayOfMonth];
+  }
+
   this.timesheet = function() {
     return _timesheet;
   };
@@ -54,7 +58,7 @@ function FetchTimesheet(logger, togglRepository) {
     var until = formatISODate(lastDayOfMonth(timesheetDate));
     this.logger.log("until: " + until);
 
-    var timesheet = [];
+    var timesheet = new Timesheet();
   
     var report = this.togglRepository.detailedReport(workspaceId, since, until);
   
@@ -63,7 +67,7 @@ function FetchTimesheet(logger, togglRepository) {
       addTimeEntryToTimesheet(timesheet, timeEntry);  
     }
   
-    return timesheet;
+    return timesheet.timesheet();
   };
 
   function addTimeEntryToTimesheet(timesheet, timeEntry) {
@@ -78,11 +82,11 @@ function FetchTimesheet(logger, togglRepository) {
   }
 
   function getOrCreateTimesheetDayEntry(timesheet, startDate) {
-    if (!timesheet[startDate.getDate()]) {
+    if (!timesheet.hasDayOfMonth(startDate.getDate())) {
       that.logger.log("add " + startDate.getDate() + " to timesheet");
-      timesheet[startDate.getDate()] = new TimesheetDayEntry();
+      timesheet.create(startDate.getDate());
     }
-    var timesheetDay = timesheet[startDate.getDate()];
+    var timesheetDay = timesheet.get(startDate.getDate());
     return timesheetDay;
   }
 }
