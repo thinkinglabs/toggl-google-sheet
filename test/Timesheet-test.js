@@ -3,7 +3,7 @@ QUnit.module('Timesheet', function() {
 
   QUnit.module('TimesheetDateEntry', function() {
 
-    QUnit.test('new date entry has no clients', function(assert) {
+    QUnit.test('new date entry is empty', function(assert) {
       var dateEntry = new TimesheetDayEntry();
 
       assert.deepEqual(Object.keys(dateEntry), ['add'], 'Passed!');
@@ -27,6 +27,16 @@ QUnit.module('Timesheet', function() {
       dateEntry.add('aClient', 5);
 
       assert.equal(dateEntry['aClient'], 12, 'Passed!');
+    });
+
+  });
+
+  QUnit.module('Timesheet', function() {
+
+    QUnit.test('new timesheet is empty', function( assert ) {
+      var timesheet = new Timesheet();
+
+      assert.deepEqual(timesheet.timesheet(), [], 'Passed!');
     });
 
   });

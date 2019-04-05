@@ -1,4 +1,14 @@
 
+function Timesheet(daysOfMonth) {
+  var that = this;
+
+  var _daysOfMonth = [];
+
+  this.timesheet = function() {
+    return _daysOfMonth;
+  }
+}
+
 function TimesheetDayEntry(clients) {
   var that = this;
 
