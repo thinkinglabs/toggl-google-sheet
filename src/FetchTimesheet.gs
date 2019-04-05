@@ -6,11 +6,15 @@ function Timesheet(timesheet) {
 
   this.hasDayOfMonth = function(dayOfMonth) {
     return _timesheet[dayOfMonth] ? true : false;
-  }
+  };
+
+  this.create = function(dayOfMonth) {
+    _timesheet[dayOfMonth] = new TimesheetDayEntry();
+  };
 
   this.timesheet = function() {
     return _timesheet;
-  }
+  };
 }
 
 function TimesheetDayEntry(clients) {
