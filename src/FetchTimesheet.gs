@@ -4,6 +4,10 @@ function Timesheet(daysOfMonth) {
 
   var _daysOfMonth = daysOfMonth ? daysOfMonth : [];
 
+  this.hasDayOfMonth = function(dayOfMonth) {
+    return _daysOfMonth[dayOfMonth] ? true : false;
+  }
+
   this.timesheet = function() {
     return _daysOfMonth;
   }

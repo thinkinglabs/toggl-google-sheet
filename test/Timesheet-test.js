@@ -47,6 +47,12 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), expected, 'Passed!');
     });
 
+    QUnit.test('hasDaysOfMonth', function( assert ) {
+      var timesheet = new Timesheet([,new TimesheetDayEntry({aClient:5})]);
+
+      assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
+    });
+
   });
 
   // QUnit.module('TimesheetClientEntry', function() {
