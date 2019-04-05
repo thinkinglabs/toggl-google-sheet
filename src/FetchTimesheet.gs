@@ -2,7 +2,7 @@
 function Timesheet(daysOfMonth) {
   var that = this;
 
-  var _daysOfMonth = [];
+  var _daysOfMonth = daysOfMonth ? daysOfMonth : [];
 
   this.timesheet = function() {
     return _daysOfMonth;

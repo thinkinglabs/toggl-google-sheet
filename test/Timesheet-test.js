@@ -39,6 +39,14 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), [], 'Passed!');
     });
 
+    QUnit.test('new timesheet with one day', function( assert ) {
+      var timesheet = new Timesheet([new TimesheetDayEntry({aClient:5})]);
+      
+      var expected = [new TimesheetDayEntry({aClient:5})];
+
+      assert.deepEqual(timesheet.timesheet(), expected, 'Passed!');
+    });
+
   });
 
   // QUnit.module('TimesheetClientEntry', function() {
