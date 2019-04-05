@@ -1,15 +1,15 @@
 
-function Timesheet(daysOfMonth) {
+function Timesheet(timesheet) {
   var that = this;
 
-  var _daysOfMonth = daysOfMonth ? daysOfMonth : [];
+  var _timesheet = timesheet ? timesheet : [];
 
   this.hasDayOfMonth = function(dayOfMonth) {
-    return _daysOfMonth[dayOfMonth] ? true : false;
+    return _timesheet[dayOfMonth] ? true : false;
   }
 
   this.timesheet = function() {
-    return _daysOfMonth;
+    return _timesheet;
   }
 }
 
