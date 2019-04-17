@@ -16,6 +16,14 @@ function Timesheet(timesheet) {
     return _timesheet[dayOfMonth];
   }
 
+  this.add = function(date, client, duration) {
+    if (!that.hasDayOfMonth(date.getDate())) {
+      that.create(date.getDate());
+    }
+    var timesheetDay = that.get(date.getDate());
+    timesheetDay.add(client, duration);
+  }
+
   this.timesheet = function() {
     return _timesheet;
   };

@@ -39,7 +39,7 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), [], 'Passed!');
     });
 
-    QUnit.test('new timesheet with one day', function( assert ) {
+    QUnit.test('new timesheet having one day', function( assert ) {
       var timesheet = new Timesheet([new TimesheetDayEntry({aClient:5})]);
       
       var expected = [new TimesheetDayEntry({aClient:5})];
@@ -53,7 +53,7 @@ QUnit.module('Timesheet', function() {
       assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
     });
 
-    QUnit.test('new timesheet create timesheet day entry for given day of month', function( assert ) {
+    QUnit.test('create day entry for a given day of month', function( assert ) {
       var timesheet = new Timesheet();
 
       timesheet.create(2);
@@ -61,7 +61,7 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), [,,new TimesheetDayEntry()], 'Passed!');
     });
 
-    QUnit.test('new timesheet get timesheet day entry for given day of month', function( assert ) {
+    QUnit.test('get day entry for a given day of month', function( assert ) {
       var timesheet = new Timesheet([,,new TimesheetDayEntry({aClient:5})]);
 
       var actual = timesheet.get(2);
@@ -69,7 +69,7 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(actual, new TimesheetDayEntry({aClient:5}), 'Passed!');
     });
 
-    QUnit.test('hasDayOfMonth(1) should be true when create(1)', function( assert ) {
+    QUnit.test('when creating a day entry hasDayOfMonth(1) should be true', function( assert ) {
       var timesheet = new Timesheet();
 
       timesheet.create(1);
@@ -77,12 +77,21 @@ QUnit.module('Timesheet', function() {
       assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
     });
 
-    QUnit.test('not hasDayOfMonth(1) should be false when create(1)', function( assert ) {
+    QUnit.test('when creating a day entry not hasDayOfMonth(1) should be false', function( assert ) {
       var timesheet = new Timesheet();
 
       timesheet.create(1);
 
       assert.notOk(!timesheet.hasDayOfMonth(1), 'Passed!');
+    });
+
+    QUnit.test('when timesheet is empty add a time entry', function( assert ) {
+      var timesheet = new Timesheet();
+
+      var startDate = new Date(2019, 3, 5);
+      timesheet.add(startDate, 'aClient', 201);
+
+      assert.deepEqual(timesheet.timesheet(), [,,,,,new TimesheetDayEntry({aClient:201})]);
     });
 
   });
