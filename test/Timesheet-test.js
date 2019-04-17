@@ -88,10 +88,19 @@ QUnit.module('Timesheet', function() {
     QUnit.test('when timesheet is empty add a time entry', function( assert ) {
       var timesheet = new Timesheet();
 
-      var startDate = new Date(2019, 3, 5);
-      timesheet.add(startDate, 'aClient', 201);
+      var date = new Date(2019, 3, 5);
+      timesheet.add(date, 'aClient', 201);
 
       assert.deepEqual(timesheet.timesheet(), [,,,,,new TimesheetDayEntry({aClient:201})]);
+    });
+
+    QUnit.test('when timesheet has a day entry add a time entry for the same day', function( assert ) {
+      var timesheet = new Timesheet([,,,,,new TimesheetDayEntry({clientA:5})]);
+
+      var date = new Date(2019, 3, 5);
+      timesheet.add(date, 'clientB', 201);
+
+      assert.deepEqual(timesheet.timesheet(), [,,,,,new TimesheetDayEntry({clientA:5,clientB:201})]);
     });
 
   });
