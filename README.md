@@ -1,4 +1,4 @@
-# Toggl Google Sheet
+# Toggl Google Sheet [![Build Status](https://travis-ci.org/thinkinglabs/toggl-google-sheet.svg?branch=master)](https://travis-ci.org/thinkinglabs/toggl-google-sheet)
 
 This Google Apps script imports time entries from Toggl.com into a Google Sheet using their [Detailed Report API](https://github.com/toggl/toggl_api_docs/blob/master/reports/detailed.md).
 
