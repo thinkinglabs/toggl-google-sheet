@@ -14,7 +14,7 @@ Open [this Google Sheet](https://docs.google.com/spreadsheets/d/1rXMdRwkMCeC2kq0
 
 Create a new Google Sheet.
 
-Create a new script in your newly created Google Sheet and paste the contents of all of the `*.gs` files in their respective script files.
+Create a new script in your newly created Google Sheet and paste the contents of all of the `src/*.gs` files in their respective script files.
 
 Edit `Toggl.gs` to fill in your *workspace_id* and *api_token*.
 
