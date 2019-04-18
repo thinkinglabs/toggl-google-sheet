@@ -16,8 +16,6 @@ Create a new Google Sheet.
 
 Create a new script in your newly created Google Sheet and paste the contents of all of the `src/*.gs` files in their respective script files.
 
-Edit `Toggl.gs` to fill in your *workspace_id* and *api_token*.
-
 Rename the first sheet as _Config_.
 
 Add the following information in cell A1 of the _Config_ sheet:
