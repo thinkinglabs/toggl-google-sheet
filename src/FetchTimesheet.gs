@@ -1,5 +1,4 @@
 
-
 function FetchTimesheet(logger, togglRepository) {
   var that = this;
 
@@ -20,29 +19,15 @@ function FetchTimesheet(logger, togglRepository) {
   
     for (var i = 0; i < report.length; i++) {
       var timeEntry = report[i];
-      addTimeEntryToTimesheet(timesheet, timeEntry);  
+
+      var startDate = timeEntry.startDate;
+      var client = timeEntry.client;
+      var duration = timeEntry.duration;
+
+      that.logger.log("add ["+startDate.getDate()+"]: " + client + " " + duration);
+      timesheet.add(startDate, client, duration);
     }
-  
+    
     return timesheet.timesheet();
   };
-
-  function addTimeEntryToTimesheet(timesheet, timeEntry) {
-    var client = timeEntry.client;
-    var startDate = timeEntry.startDate;
-    var duration = timeEntry.duration;
-
-    var timesheetDay = getOrCreateTimesheetDayEntry(timesheet, startDate);
-    timesheetDay.add(client, duration);
-
-    that.logger.log(client + " ["+startDate.getDate()+"]: " + timesheetDay[client]);
-  }
-
-  function getOrCreateTimesheetDayEntry(timesheet, startDate) {
-    if (!timesheet.hasDayOfMonth(startDate.getDate())) {
-      that.logger.log("add " + startDate.getDate() + " to timesheet");
-      timesheet.create(startDate.getDate());
-    }
-    var timesheetDay = timesheet.get(startDate.getDate());
-    return timesheetDay;
-  }
 }
