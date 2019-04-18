@@ -1,5 +1,7 @@
 # TODO
 
+clean up the public interface of Timesheet and TimesheetDayEntry after adding Timesheet.add()
+
 translate TimeEntry to a Timesheet object to populate the sheet
 
 use GCP StackLogging console API instead of GAS Logger
