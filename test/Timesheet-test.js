@@ -57,12 +57,6 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), expected, 'Passed!');
     });
 
-    QUnit.test('hasDaysOfMonth returns true', function( assert ) {
-      var timesheet = new Timesheet([,new TimesheetDayEntry({aClient:5})]);
-
-      assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
-    });
-
     QUnit.test('create day entry for a given day of month', function( assert ) {
       var timesheet = new Timesheet();
 
@@ -77,22 +71,6 @@ QUnit.module('Timesheet', function() {
       var actual = timesheet.get(2);
 
       assert.deepEqual(actual, new TimesheetDayEntry({aClient:5}), 'Passed!');
-    });
-
-    QUnit.test('when creating a day entry hasDayOfMonth(1) should be true', function( assert ) {
-      var timesheet = new Timesheet();
-
-      timesheet.create(1);
-
-      assert.ok(timesheet.hasDayOfMonth(1), 'Passed!');
-    });
-
-    QUnit.test('when creating a day entry not hasDayOfMonth(1) should be false', function( assert ) {
-      var timesheet = new Timesheet();
-
-      timesheet.create(1);
-
-      assert.notOk(!timesheet.hasDayOfMonth(1), 'Passed!');
     });
 
     QUnit.test('when timesheet is empty add a time entry', function( assert ) {

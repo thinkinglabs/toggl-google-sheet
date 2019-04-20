@@ -4,10 +4,6 @@ function Timesheet(timesheet) {
 
   var _timesheet = timesheet ? timesheet : [];
 
-  this.hasDayOfMonth = function(dayOfMonth) {
-    return _timesheet[dayOfMonth] ? true : false;
-  };
-
   this.create = function(dayOfMonth) {
     _timesheet[dayOfMonth] = new TimesheetDayEntry();
   };
@@ -17,7 +13,7 @@ function Timesheet(timesheet) {
   }
 
   this.add = function(date, client, duration) {
-    if (!that.hasDayOfMonth(date.getDate())) {
+    if (!hasDayOfMonth(date.getDate())) {
       that.create(date.getDate());
     }
     var timesheetDay = that.get(date.getDate());
@@ -26,6 +22,10 @@ function Timesheet(timesheet) {
 
   this.timesheet = function() {
     return _timesheet;
+  };
+
+  function hasDayOfMonth(dayOfMonth) {
+    return _timesheet[dayOfMonth] ? true : false;
   };
 }
 
