@@ -57,14 +57,6 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), expected, 'Passed!');
     });
 
-    QUnit.test('create day entry for a given day of month', function( assert ) {
-      var timesheet = new Timesheet();
-
-      timesheet.create(2);
-
-      assert.deepEqual(timesheet.timesheet(), [,,new TimesheetDayEntry()], 'Passed!');
-    });
-
     QUnit.test('get day entry for a given day of month', function( assert ) {
       var timesheet = new Timesheet([,,new TimesheetDayEntry({aClient:5})]);
 
