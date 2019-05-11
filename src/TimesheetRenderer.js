@@ -28,21 +28,20 @@ function TimesheetRenderer(fetchTimesheet) {
     var numberOfMealVouchers = 0;
 
     var row = 2
-    for (var i = 0; i < timesheet.length; i++) {
+    for (var i = 1; i < timesheet.length; i++) {
 
       var timesheetDay = timesheet[i];
+      var clients = timesheetDay.clients();
       var durationInHours = 0;
-      for (var property in timesheetDay) {
-        if (timesheetDay.hasOwnProperty(property) && property !== 'add') {
-          var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
-          var client = property;
-          var duration = millisToDuration(timesheetDay[property]);
-          durationInHours = durationInHours + millisToDecimalHours(timesheetDay[property]);
+      for (var property in clients) {
+        var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
+        var client = property;
+        var duration = millisToDuration(clients[property]);
+        durationInHours = durationInHours + millisToDecimalHours(clients[property]);
 
-          sheet.getRange(row, 1, 1, 3).setValues([[start, client, duration]]);
-          sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
-          ++row;
-        }
+        sheet.getRange(row, 1, 1, 3).setValues([[start, client, duration]]);
+        sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+        ++row;
       }
 
       if (durationInHours >= 2) {

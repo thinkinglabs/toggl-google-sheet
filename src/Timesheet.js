@@ -41,8 +41,8 @@ function TimesheetDayEntry(clients) {
     }
   }
 
-  this.getDurationFor = function(client) {
-    return _clients[client];
+  this.clients = function(client) {
+    return _clients;
   }
 
   function addDurationTo(client, duration) {
