@@ -121,7 +121,7 @@ QUnit.module('Timesheet', function() {
       assert.ok(iterator.next().done, 'Passed!');
     });
 
-    QUnit.test('iterate over timesheet with one day', function( assert ) {
+    QUnit.test('iterate over timesheet having one kday', function( assert ) {
       var timesheet = new Timesheet([new TimesheetDayEntry({aClient:5})]);
 
       var iterator = timesheet.iterator();
@@ -133,7 +133,7 @@ QUnit.module('Timesheet', function() {
       assert.ok(iterator.next().done, 'Passed!');
     });
 
-    QUnit.test('iterate over timesheet with two subsequent days', function( assert ) {
+    QUnit.test('iterate over timesheet having two subsequent days', function( assert ) {
       var timesheet = new Timesheet([new TimesheetDayEntry({clientA:5}), new TimesheetDayEntry({clientB:7})]);
 
       var iterator = timesheet.iterator();
@@ -144,13 +144,25 @@ QUnit.module('Timesheet', function() {
       assert.ok(iterator.next().done, 'Passed!');
     });
 
-    QUnit.test('iterate over timesheet with two non-subsequent days', function( assert ) {
+    QUnit.test('iterate over timesheet having two non-subsequent days', function( assert ) {
       var timesheet = new Timesheet([new TimesheetDayEntry({clientA:5}), , new TimesheetDayEntry({clientB:7})]);
 
       var iterator = timesheet.iterator();
 
       assert.deepEqual(iterator.next().value, new TimesheetDayEntry({clientA:5}), 'Passed!');
       assert.deepEqual(iterator.next().value, new TimesheetDayEntry({clientB:7}), 'Passed!');
+
+      assert.ok(iterator.next().done, 'Passed!');
+    });
+
+    QUnit.test('iterate over timesheet having one non-first day', function( assert ) {
+      var timesheet = new Timesheet([,,,new TimesheetDayEntry({aClient:5})]);
+
+      var iterator = timesheet.iterator();
+      var item = iterator.next();
+
+      assert.deepEqual(item.value, new TimesheetDayEntry({aClient:5}), 'Passed!');
+      assert.notOk(item.done, 'Passed!');
 
       assert.ok(iterator.next().done, 'Passed!');
     });
