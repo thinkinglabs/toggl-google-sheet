@@ -1,7 +1,7 @@
 
 QUnit.module('Timesheet', function() {
 
-  QUnit.module('TimesheetDateEntry', function() {
+  QUnit.module('TimesheetDayEntry', function() {
 
     QUnit.test('new date entry is empty', function(assert) {
       var dateEntry = new TimesheetDayEntry();
