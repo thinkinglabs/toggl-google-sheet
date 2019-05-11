@@ -113,5 +113,13 @@ QUnit.module('Timesheet', function() {
       assert.deepEqual(timesheet.timesheet(), [,,,,,new TimesheetDayEntry({aClient:206})], 'Passed!');
     });
 
+    QUnit.test('iterate over empty timesheet', function( assert ) {
+      var timesheet = new Timesheet();
+
+      var iterator = timesheet.iterator();
+
+      assert.ok(iterator.next().done, 'Passed!');
+    });
+
   });
 });

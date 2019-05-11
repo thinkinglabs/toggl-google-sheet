@@ -15,6 +15,14 @@ function Timesheet(timesheet) {
     return _timesheet;
   };
 
+  this.iterator = function() {
+    return {
+      next: function() {
+        return {done: true};
+      }
+    };
+  };
+
   function hasDayOfMonth(dayOfMonth) {
     return _timesheet[dayOfMonth] ? true : false;
   };
@@ -59,7 +67,7 @@ function TimesheetDayEntry(clients) {
         }
       }
     };
-  }
+  };
 
   function addDurationTo(client, duration) {
     _clients[client] = _clients[client] + duration;
