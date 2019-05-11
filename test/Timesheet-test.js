@@ -45,7 +45,7 @@ QUnit.module('Timesheet', function() {
       var actual = iterator.next();
 
       assert.deepEqual(actual.value, undefined, 'Passed!');
-      assert.equal(actual.done, true, 'Passed!');
+      assert.ok(actual.done, 'Passed!');
     });
 
     QUnit.test('iterate over one client', function( assert ) {
@@ -54,9 +54,9 @@ QUnit.module('Timesheet', function() {
       var actual = iterator.next();
 
       assert.deepEqual(actual.value, {clientName: 'aClient', duration: 7}, 'Passed!');
-      assert.equal(actual.done, false, 'Passed!');
+      assert.notOk(actual.done, 'Passed!');
 
-      assert.equal(iterator.next().done, true, 'Passed!');
+      assert.ok(iterator.next().done, 'Passed!');
     });
 
     QUnit.test('iterate over two clients', function( assert ) {
@@ -65,7 +65,7 @@ QUnit.module('Timesheet', function() {
 
       assert.deepEqual(iterator.next().value, {clientName: 'clientA', duration: 7}, 'Passed!');
       assert.deepEqual(iterator.next().value, {clientName: 'clientB', duration: 10}, 'Passed!');
-      assert.equal(iterator.next().done, true, 'Passed!');
+      assert.ok(iterator.next().done, 'Passed!');
     });
 
   });
