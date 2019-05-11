@@ -1,6 +1,6 @@
 
 function Timesheet(timesheet) {
-  
+
   var _timesheet = timesheet ? timesheet : [];
 
   this.add = function(date, client, duration) {
@@ -30,24 +30,30 @@ function Timesheet(timesheet) {
 }
 
 function TimesheetDayEntry(clients) {
-  var that = this;
 
-  if (clients) {
-    Object.keys(clients).forEach(function(key) {
-      var value = clients[key];
-      that[key] = value;
-    });
-  }
+  var _clients = clients ? clients : {};
 
   this.add = function(client, duration) {
     if (hasClient(client)) {
-      that[client] = that[client] + duration;
+      addDurationTo(client, duration);
     } else {
-      that[client] = duration;
+      setDurationFor(client, duration);
     }
   }
 
+  this.getDurationFor = function(client) {
+    return _clients[client];
+  }
+
+  function addDurationTo(client, duration) {
+    _clients[client] = _clients[client] + duration;
+  }
+
+  function setDurationFor(client, duration) {
+    _clients[client] = duration;
+  }
+
   function hasClient(client) {
-    return that[client];
+    return _clients[client];
   }
 }

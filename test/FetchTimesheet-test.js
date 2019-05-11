@@ -19,10 +19,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].aClient = 5;
-  
+    var expected = [, new TimesheetDayEntry({aClient:5})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   
@@ -35,10 +33,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].aClient = 29;
-  
+    var expected = [, new TimesheetDayEntry({aClient:29})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   
@@ -50,11 +46,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].clientA = 5;
-    expected[1].clientB = 6;
-  
+    var expected = [, new TimesheetDayEntry({clientA:5, clientB:6})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   
@@ -68,11 +61,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].clientA = 15;
-    expected[1].clientB = 17;
-  
+    var expected = [, new TimesheetDayEntry({clientA:15, clientB:17})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   
@@ -84,12 +74,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].aClient = 5;
-    expected[3] = new TimesheetDayEntry();
-    expected[3].aClient = 6;
-  
+    var expected = [, new TimesheetDayEntry({aClient:5}), , new TimesheetDayEntry({aClient:6})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   
@@ -103,12 +89,8 @@ QUnit.module('FetchTimesheet', function() {
     ]));
   
     var actual = fetchTimesheet.execute('aWorkspaceId', new Date(2019, 2, 1));
-    var expected = [];
-    expected[1] = new TimesheetDayEntry();
-    expected[1].aClient = 12 ;
-    expected[3] = new TimesheetDayEntry();
-    expected[3].aClient = 14
-  
+    var expected = [, new TimesheetDayEntry({aClient:12}), , new TimesheetDayEntry({aClient:14})];
+    
     assert.deepEqual(actual, expected, 'Passed!')
   });
   

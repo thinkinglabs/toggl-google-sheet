@@ -6,20 +6,20 @@ QUnit.module('Timesheet', function() {
     QUnit.test('new date entry is empty', function(assert) {
       var dateEntry = new TimesheetDayEntry();
 
-      assert.deepEqual(Object.keys(dateEntry), ['add'], 'Passed!');
+      assert.deepEqual(Object.keys(dateEntry), ['add', 'getDurationFor'], 'Passed!');
     });
 
     QUnit.test('new date entry with one client duration', function(assert) {
       var dateEntry = new TimesheetDayEntry({aClient:5});
       
-      assert.equal(dateEntry['aClient'], 5, 'Passed!');
+      assert.equal(dateEntry.getDurationFor('aClient'), 5, 'Passed!');
     });
 
     QUnit.test('add client to empty date entry', function( assert ) {
       var dateEntry = new TimesheetDayEntry();
       dateEntry.add('aClient', 5);
 
-      assert.equal(dateEntry['aClient'], 5, 'Passed!');
+      assert.equal(dateEntry.getDurationFor('aClient'), 5, 'Passed!');
     });
 
     QUnit.test('add client to date entry with different client', function( assert ) {
@@ -28,15 +28,15 @@ QUnit.module('Timesheet', function() {
 
       var expected = new TimesheetDayEntry({clientA:7,clientB:5});
 
-      assert.equal(dateEntry['clientA'], 7, 'Passed!');
-      assert.equal(dateEntry['clientB'], 5, 'Passed!');
+      assert.equal(dateEntry.getDurationFor('clientA'), 7, 'Passed!');
+      assert.equal(dateEntry.getDurationFor('clientB'), 5, 'Passed!');
     });
 
     QUnit.test('add client to date entry with same client', function( assert ) {
       var dateEntry = new TimesheetDayEntry({aClient:7});
       dateEntry.add('aClient', 5);
 
-      assert.equal(dateEntry['aClient'], 12, 'Passed!');
+      assert.equal(dateEntry.getDurationFor('aClient'), 12, 'Passed!');
     });
 
   });
