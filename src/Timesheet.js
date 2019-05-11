@@ -20,9 +20,13 @@ function Timesheet(timesheet) {
 
     return {
       next: function() {
-        if (nextIndex < _timesheet.length) {
-          return {value: _timesheet[nextIndex++], done: false}
-        } else {
+        while (nextIndex < _timesheet.length) {
+          var timesheetDay = _timesheet[nextIndex++];
+          if (timesheetDay) {
+            return {value: timesheetDay, done: false};
+          }
+        }
+        if (_timesheet.length <= nextIndex) {
           return {done: true};
         }
       }
