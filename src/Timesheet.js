@@ -16,9 +16,15 @@ function Timesheet(timesheet) {
   };
 
   this.iterator = function() {
+    var nextIndex = 0;
+
     return {
       next: function() {
-        return {done: true};
+        if (nextIndex < _timesheet.length) {
+          return {value: _timesheet[nextIndex++], done: false}
+        } else {
+          return {done: true};
+        }
       }
     };
   };
