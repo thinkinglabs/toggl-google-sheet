@@ -28,24 +28,25 @@ function TimesheetRenderer(fetchTimesheet) {
     var numberOfMealVouchers = 0;
 
     var row = 2
-    for (var i = 1; i < timesheet.length; i++) {
+    for (var i = 0; i < timesheet.length; i++) {
 
       var timesheetDay = timesheet[i];
-      var clients = timesheetDay.clients();
-      var durationInHours = 0;
-      for (var property in clients) {
-        var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
-        var client = property;
-        var duration = millisToDuration(clients[property]);
-        durationInHours = durationInHours + millisToDecimalHours(clients[property]);
+      if (timesheetDay) {
+        var iterator = timesheetDay.iterator();
+        var durationInHours = 0;
+        for(var item = iterator.next(); !item.done; item = iterator.next()) {
+          var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
+          var duration = millisToDuration(item.value.duration);
+          durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
 
-        sheet.getRange(row, 1, 1, 3).setValues([[start, client, duration]]);
-        sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
-        ++row;
-      }
+          sheet.getRange(row, 1, 1, 3).setValues([[start, item.value.clientName, duration]]);
+          sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+          ++row;
+        }
 
-      if (durationInHours >= 2) {
-        ++numberOfMealVouchers;
+        if (durationInHours >= 2) {
+          ++numberOfMealVouchers;
+        }
       }
     }
 

@@ -39,6 +39,35 @@ QUnit.module('Timesheet', function() {
       assert.equal(dateEntry.clients()['aClient'], 12, 'Passed!');
     });
 
+    QUnit.test('iterate over empty day entry', function( assert ) {
+      var dateEntry = new TimesheetDayEntry();
+      var iterator = dateEntry.iterator();
+      var actual = iterator.next();
+
+      assert.deepEqual(actual.value, undefined, 'Passed!');
+      assert.equal(actual.done, true, 'Passed!');
+    });
+
+    QUnit.test('iterate over one client', function( assert ) {
+      var dateEntry = new TimesheetDayEntry({aClient:7});
+      var iterator = dateEntry.iterator();
+      var actual = iterator.next();
+
+      assert.deepEqual(actual.value, {clientName: 'aClient', duration: 7}, 'Passed!');
+      assert.equal(actual.done, false, 'Passed!');
+
+      assert.equal(iterator.next().done, true, 'Passed!');
+    });
+
+    QUnit.test('iterate over two clients', function( assert ) {
+      var dateEntry = new TimesheetDayEntry({clientA:7, clientB:10});
+      var iterator = dateEntry.iterator();
+
+      assert.deepEqual(iterator.next().value, {clientName: 'clientA', duration: 7}, 'Passed!');
+      assert.deepEqual(iterator.next().value, {clientName: 'clientB', duration: 10}, 'Passed!');
+      assert.equal(iterator.next().done, true, 'Passed!');
+    });
+
   });
 
   QUnit.module('Timesheet', function() {

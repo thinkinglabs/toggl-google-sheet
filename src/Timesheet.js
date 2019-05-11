@@ -45,6 +45,22 @@ function TimesheetDayEntry(clients) {
     return _clients;
   }
 
+  this.iterator = function() {
+    var nextIndex = 0;
+    
+    return {
+      next: function() {
+        if (nextIndex < Object.keys(_clients).length) {
+          var client = Object.keys(_clients)[nextIndex++];
+          var duration = _clients[client];
+          return {value: {clientName: client, duration: duration}, done: false}
+        } else {
+          return {done: true};
+        }
+      }
+    };
+  }
+
   function addDurationTo(client, duration) {
     _clients[client] = _clients[client] + duration;
   }
