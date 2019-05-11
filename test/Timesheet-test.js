@@ -132,5 +132,16 @@ QUnit.module('Timesheet', function() {
 
       assert.ok(iterator.next().done, 'Passed!');
     });
+
+    QUnit.test('iterate over timesheet with two days', function( assert ) {
+      var timesheet = new Timesheet([new TimesheetDayEntry({clientA:5}), new TimesheetDayEntry({clientB:7})]);
+
+      var iterator = timesheet.iterator();
+
+      assert.deepEqual(iterator.next().value, new TimesheetDayEntry({clientA:5}), 'Passed!');
+      assert.deepEqual(iterator.next().value, new TimesheetDayEntry({clientB:7}), 'Passed!');
+
+      assert.ok(iterator.next().done, 'Passed!');
+    });
   });
 });
