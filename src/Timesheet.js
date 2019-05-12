@@ -5,11 +5,11 @@ function Timesheet(timesheet) {
 
   this.add = function(date, client, duration) {
     if (!hasDayOfMonth(date.getDate())) {
-      create(date.getDate());
+      create(date);
     }
     var timesheetDay = get(date.getDate());
     timesheetDay.add(client, duration);
-  }
+  };
 
   this.timesheet = function() {
     return _timesheet;
@@ -37,8 +37,9 @@ function Timesheet(timesheet) {
     return _timesheet[dayOfMonth] ? true : false;
   };
 
-  function create(dayOfMonth) {
-    _timesheet[dayOfMonth] = new TimesheetDayEntry();
+  function create(date) {
+    var dayOfMonth = date.getDate();
+    _timesheet[dayOfMonth] = new TimesheetDayEntry(date);
   };
 
   function get(dayOfMonth) {
@@ -47,8 +48,9 @@ function Timesheet(timesheet) {
 
 }
 
-function TimesheetDayEntry(clients) {
+function TimesheetDayEntry(date, clients) {
 
+  var _date = date;
   var _clients = clients ? clients : {};
 
   this.add = function(client, duration) {
@@ -57,11 +59,15 @@ function TimesheetDayEntry(clients) {
     } else {
       setDurationFor(client, duration);
     }
-  }
+  };
 
   this.clients = function(client) {
     return _clients;
-  }
+  };
+
+  this.date = function() {
+    return _date;
+  };
 
   this.iterator = function() {
     var nextIndex = 0;

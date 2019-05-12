@@ -32,10 +32,10 @@ function TimesheetRenderer(fetchTimesheet) {
 
       var timesheetDay = timesheet[i];
       if (timesheetDay) {
+        var start = timesheetDay.date();
         var iterator = timesheetDay.iterator();
         var durationInHours = 0;
         for(var item = iterator.next(); !item.done; item = iterator.next()) {
-          var start = new Date(timesheetDate.getYear(), timesheetDate.getMonth(), i);
           var duration = millisToDuration(item.value.duration);
           durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
 
