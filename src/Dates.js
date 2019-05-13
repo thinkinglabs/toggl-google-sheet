@@ -1,15 +1,16 @@
 
 Date.prototype.equals = function(other) {
-  return other 
-    && this === other
-    || (
+  if (!other) return false;
+  if (this === other) return true;
+  if (
       this.getFullYear() === other.getFullYear()
       && this.getMonth() === other.getMonth()
       && this.getDate() === other.getDate()
       && this.getHours() === other.getHours()
       && this.getSeconds() === other.getSeconds()
       && this.getMilliseconds() === other.getMilliseconds()
-    );
+      && this.getTimezoneOffset() === other.getTimezoneOffset()
+    ) return true;
 }
 
 function firstDayOfMonth(date) {
