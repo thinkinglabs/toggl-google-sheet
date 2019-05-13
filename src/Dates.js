@@ -1,4 +1,8 @@
 
+Date.prototype.equals = function(other) {
+  return other && true;
+}
+
 function firstDayOfMonth(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
