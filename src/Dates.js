@@ -1,6 +1,6 @@
 
 Date.prototype.equals = function(other) {
-  return other && true;
+  return other && this === other;
 }
 
 function firstDayOfMonth(date) {
