@@ -28,6 +28,6 @@ function FetchTimesheet(logger, togglRepository) {
       timesheet.add(startDate, client, duration);
     }
     
-    return timesheet.timesheet();
+    return timesheet;
   };
 }

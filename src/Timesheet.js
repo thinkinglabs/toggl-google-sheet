@@ -61,7 +61,7 @@ function TimesheetDayEntry(date, clients) {
     }
   };
 
-  this.clients = function(client) {
+  this.clients = function() {
     return _clients;
   };
 
