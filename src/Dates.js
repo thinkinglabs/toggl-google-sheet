@@ -1,6 +1,7 @@
 
 Date.prototype.equals = function(other) {
   if (!other) return false;
+  if (!(other instanceof Date)) return false;
   if (this === other) return true;
   if (
       this.getFullYear() === other.getFullYear()

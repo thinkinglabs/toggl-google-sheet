@@ -112,6 +112,10 @@ QUnit.module('Dates', function() {
       assert.notOk(new Date().equals(undefined), 'Passed!');
     });
 
+    QUnit.test('when other is not a Date return false', function( assert ) {
+      assert.notOk(new Date().equals('not a date'), 'Passed!');
+    });
+
     QUnit.test('when other has same identity return true', function( assert ) {
       var actual = new Date();
       var expected = actual;
