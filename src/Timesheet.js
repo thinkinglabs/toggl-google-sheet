@@ -85,6 +85,10 @@ function TimesheetDayEntry(date, clients) {
     };
   };
 
+  this.equals = function(other) {
+    if (!other) return false;
+  };
+
   function addDurationTo(client, duration) {
     _clients[client] = _clients[client] + duration;
   }

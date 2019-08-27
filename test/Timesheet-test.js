@@ -70,6 +70,14 @@ QUnit.module('Timesheet', function() {
       assert.ok(iterator.next().done, 'Passed!');
     });
 
+    QUnit.module('equals', function() {
+
+      QUnit.test('when other is undefined return false', function( assert ) {
+        assert.notOk(new TimesheetDayEntry().equals(undefined), 'Passed!');
+      });
+
+    });
+
   });
 
   QUnit.module('Timesheet', function() {
