@@ -1,5 +1,11 @@
 # TODO
 
+use Mocha instead of QUnit + Chai
+
+use $ convention for hidden fields
+
+use an Ecmascript 6 -> 5 transpiler
+
 translate TimeEntry to a Timesheet object to populate the sheet
 
 use GCP StackLogging console API instead of GAS Logger

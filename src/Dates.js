@@ -12,6 +12,7 @@ Date.prototype.equals = function(other) {
       && this.getMilliseconds() === other.getMilliseconds()
       && this.getTimezoneOffset() === other.getTimezoneOffset()
     ) return true;
+  return false;
 }
 
 function firstDayOfMonth(date) {
