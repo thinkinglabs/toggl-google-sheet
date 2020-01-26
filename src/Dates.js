@@ -15,7 +15,7 @@ Date.prototype.equals = function(other) {
   return false;
 }
 
-function firstDayOfMonth(date) {
+var firstDayOfMonth = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
@@ -82,4 +82,19 @@ function padStart(str, targetLength, padchar) {
   var pad_char = typeof padchar !== 'undefined' ? padchar : '0';
   var pad = new Array(1 + targetLength).join(pad_char);
   return (pad + str).slice(-pad.length);
+}
+
+// https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/
+// https://tech.holidayextras.com/bridging-the-gap-with-google-app-script-acfc74b4ea3c
+// https://stackoverflow.com/questions/4224606/how-to-check-whether-a-script-is-running-under-node-js
+if (typeof module !== "undefined" && module.exports) {
+  // in nodejs
+  console.log("[Dates] NodeJS: true");
+  module.exports.firstDayOfMonth = firstDayOfMonth;
+} else {
+  if (typeof SpreadsheetApp === 'undefined') {
+    console.log("[Dates] NodeJS: false - AppScript: false");
+  } else {
+    new Logging("Dates").log("NodeJS: false - AppScript: true");
+  }
 }

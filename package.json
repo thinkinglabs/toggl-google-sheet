@@ -8,11 +8,12 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "jest": "^25.1.0",
     "node-qunit-phantomjs": "^2.0.1",
     "qunit": "^2.9.2"
   },
   "scripts": {
-    "test": "node-qunit-phantomjs ./test/fixture.html --verbose"
+    "test": "node-qunit-phantomjs ./test/fixture.html --verbose && jest"
   },
   "repository": {
     "type": "git",

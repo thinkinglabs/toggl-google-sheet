@@ -82,10 +82,6 @@ QUnit.module('Dates', function() {
 
   });
 
-  QUnit.test('firstDayOfMonth', function ( assert ) {
-    assert.deepEqual(firstDayOfMonth(new Date(2019, 1, 27)), new Date(2019, 1, 1), 'Passed!');
-  });
-
   QUnit.module('lastDayOfMonth', function() {
 
     QUnit.test('February 2016', function( assert ) {
