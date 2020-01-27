@@ -75,3 +75,9 @@ test('last day of the month of March 2019 is the 31st', () => {
 test('last day of the month of April 2019 is the 30th', () => {
   expect(dates.lastDayOfMonth(new Date(2019, 3, 9))).toStrictEqual(new Date(2019, 3, 30));
 });
+
+test('parse ISO datetime 2019-03-15T10:20:03 is March 15th 1019 at 10:20:03', () => {
+  var actual = dates.parseISODateTime('2019-03-15T10:20:03');
+  var expected = new Date(2019, 2, 15, 10, 20, 3);
+  expect(actual).toStrictEqual(expected);
+});

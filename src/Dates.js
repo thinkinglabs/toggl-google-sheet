@@ -46,7 +46,7 @@ function formatYYYYMM(date) {
   return (padStart(date.getFullYear(), 4) + padStart(date.getMonth()+1, 2));
 }
 
-function parseISODateTime(isoDateTime) {
+var parseISODateTime = function(isoDateTime) {
   try{
     var result = new Date();
     var regexp = "([0-9]{4})(-([0-9]{2})(-([0-9]{2})" +
@@ -93,6 +93,7 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports.firstDayOfMonth = firstDayOfMonth;
   module.exports.lastDayOfMonth = lastDayOfMonth;
   module.exports.daysInMonth = daysInMonth;
+  module.exports.parseISODateTime = parseISODateTime;
 } else {
   if (typeof SpreadsheetApp === 'undefined') {
     console.log("[Dates] NodeJS: false - AppScript: false");
