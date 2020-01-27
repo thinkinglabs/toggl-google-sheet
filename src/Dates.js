@@ -19,13 +19,13 @@ var firstDayOfMonth = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
+var daysInMonth = function(year, month) {
+  return new Date(year, month + 1, 0).getDate();
+}
+
 var lastDayOfMonth = function(date) {
   var days = daysInMonth(date.getFullYear(), date.getMonth());
   return new Date(date.getFullYear(), date.getMonth(), days);
-}
-
-function daysInMonth(year, month) {
-  return new Date(year, month + 1, 0).getDate();
 }
 
 function millisToDuration(millis) {
@@ -92,6 +92,7 @@ if (typeof module !== "undefined" && module.exports) {
   console.log("[Dates] NodeJS: true");
   module.exports.firstDayOfMonth = firstDayOfMonth;
   module.exports.lastDayOfMonth = lastDayOfMonth;
+  module.exports.daysInMonth = daysInMonth;
 } else {
   if (typeof SpreadsheetApp === 'undefined') {
     console.log("[Dates] NodeJS: false - AppScript: false");
