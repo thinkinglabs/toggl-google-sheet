@@ -19,7 +19,7 @@ var firstDayOfMonth = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
 
-function lastDayOfMonth(date) {
+var lastDayOfMonth = function(date) {
   var days = daysInMonth(date.getFullYear(), date.getMonth());
   return new Date(date.getFullYear(), date.getMonth(), days);
 }
@@ -91,6 +91,7 @@ if (typeof module !== "undefined" && module.exports) {
   // in nodejs
   console.log("[Dates] NodeJS: true");
   module.exports.firstDayOfMonth = firstDayOfMonth;
+  module.exports.lastDayOfMonth = lastDayOfMonth;
 } else {
   if (typeof SpreadsheetApp === 'undefined') {
     console.log("[Dates] NodeJS: false - AppScript: false");

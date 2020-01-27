@@ -82,26 +82,6 @@ QUnit.module('Dates', function() {
 
   });
 
-  QUnit.module('lastDayOfMonth', function() {
-
-    QUnit.test('February 2016', function( assert ) {
-      assert.deepEqual(lastDayOfMonth(new Date(2016, 1, 15)), new Date(2016, 1, 29), 'Passed!');
-    });
-
-    QUnit.test('January 2019', function( assert ) {
-      assert.deepEqual(lastDayOfMonth(new Date(2019, 0, 11)), new Date(2019, 0, 31), 'Passed!');
-    });
-  
-    QUnit.test('February 2019 is 28', function( assert ) {
-      assert.deepEqual(lastDayOfMonth(new Date(2019, 1, 21)), new Date(2019, 1, 28), 'Passed!');
-    });
-
-    QUnit.test('March 2019 is 31', function( assert ) {
-      assert.deepEqual(lastDayOfMonth(new Date(2019, 2, 3)), new Date(2019, 2, 31), 'Passed!');
-    });
-
-  });
-
   QUnit.module('equals', function() {
 
     QUnit.test('when other is undefined return false', function( assert ) {
