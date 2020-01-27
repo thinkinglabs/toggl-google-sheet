@@ -38,6 +38,10 @@ Fill a date of the month you want to import in cell B1. If you want your timeshe
 
 It also calculates the number of days worked during that month.
 
+## Implementation
+
+Google App Scripts only supports EcmaScript 5.
+
 ## Run tests
 
 To run the tests:
@@ -47,8 +51,18 @@ npm install
 npm test
 ```
 
-Tests are implemented using [QUnit](https://qunitjs.com/). Apparently Google App Scripts only supports EcmaScript 5.
-Qunit seems to be the only test framework that still supports ES5.
+Tests are implemented using [QUnit](https://qunitjs.com/) and [Jest](https://jestjs.io/en/).
+
+**WIP** QUnit will gradually be replaced by Jest.
+
+In order to use NodeJS based unit test frameworks and still be Google Apps Script compatible, the following hack
+will be introduced for each NodeJS module.
+
+```JavaScript
+if (typeof module !== "undefined" && module.exports) {
+  module.exports.firstDayOfMonth = firstDayOfMonth;
+}
+```
 
 `test/fixture.html` loads all the code and test code. The tests are executed inside a headless PhantomJS browser.
 
