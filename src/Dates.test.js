@@ -89,3 +89,7 @@ test('format ISO datetime 2019-03-17', () =>  {
 test('format ISO datetime 2019-10-01', () => {
   expect(dates.formatISODate(new Date(2019, 9, 1))).toBe('2019-10-01');
 });
+
+test('format YYYYMM 2019-03-17', () => {
+  expect(dates.formatYYYYMM(new Date(2019, 2, 17))).toBe('201903');
+});

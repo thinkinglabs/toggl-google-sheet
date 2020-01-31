@@ -42,7 +42,7 @@ var formatISODate = function(date) {
   return (padStart(date.getFullYear(), 4) + '-' + padStart(date.getMonth()+1, 2) + '-' + padStart(date.getDate(), 2));
 }
 
-function formatYYYYMM(date) {
+var formatYYYYMM = function(date) {
   return (padStart(date.getFullYear(), 4) + padStart(date.getMonth()+1, 2));
 }
 
@@ -95,6 +95,7 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports.daysInMonth = daysInMonth;
   module.exports.parseISODateTime = parseISODateTime;
   module.exports.formatISODate = formatISODate;
+  module.exports.formatYYYYMM = formatYYYYMM;
 } else {
   if (typeof SpreadsheetApp === 'undefined') {
     console.log("[Dates] NodeJS: false - AppScript: false");

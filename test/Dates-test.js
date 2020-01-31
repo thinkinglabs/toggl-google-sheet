@@ -1,14 +1,6 @@
 
 QUnit.module('Dates', function() {
 
-  QUnit.module('formatYYYYMM', function() {
-
-    QUnit.test('2019-03-17', function( assert ) {
-      assert.equal(formatYYYYMM(new Date(2019, 2, 17)), '201903', 'Passed!');
-    });
-
-  });
-
   QUnit.module('equals', function() {
 
     QUnit.test('when other is undefined return false', function( assert ) {
