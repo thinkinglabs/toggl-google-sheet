@@ -81,3 +81,11 @@ test('parse ISO datetime 2019-03-15T10:20:03 is March 15th 1019 at 10:20:03', ()
   var expected = new Date(2019, 2, 15, 10, 20, 3);
   expect(actual).toStrictEqual(expected);
 });
+
+test('format ISO datetime 2019-03-17', () =>  {
+  expect(dates.formatISODate(new Date(2019, 2, 17))).toBe('2019-03-17');
+});
+
+test('format ISO datetime 2019-10-01', () => {
+  expect(dates.formatISODate(new Date(2019, 9, 1))).toBe('2019-10-01');
+});

@@ -1,18 +1,6 @@
 
 QUnit.module('Dates', function() {
 
-  QUnit.module('formatISODate', function() {
-
-    QUnit.test('2019-03-17', function( assert ) {
-      assert.equal(formatISODate(new Date(2019, 2, 17)), '2019-03-17', 'Passed!');
-    });
-  
-    QUnit.test('2019-10-01', function( assert ) {
-      assert.equal(formatISODate(new Date(2019, 9, 1)), '2019-10-01', 'Passed!');
-    });
-
-  });
- 
   QUnit.module('formatYYYYMM', function() {
 
     QUnit.test('2019-03-17', function( assert ) {

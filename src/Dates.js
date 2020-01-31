@@ -38,7 +38,7 @@ function millisToDecimalHours(millis) {
   return millis / 1000 / 60 / 60;
 }
 
-function formatISODate(date) {
+var formatISODate = function(date) {
   return (padStart(date.getFullYear(), 4) + '-' + padStart(date.getMonth()+1, 2) + '-' + padStart(date.getDate(), 2));
 }
 
@@ -94,6 +94,7 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports.lastDayOfMonth = lastDayOfMonth;
   module.exports.daysInMonth = daysInMonth;
   module.exports.parseISODateTime = parseISODateTime;
+  module.exports.formatISODate = formatISODate;
 } else {
   if (typeof SpreadsheetApp === 'undefined') {
     console.log("[Dates] NodeJS: false - AppScript: false");
