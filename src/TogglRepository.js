@@ -4,9 +4,9 @@ function TimeEntry(client, startDate, duration) {
   this.duration = duration;
 }
 
-function TogglRepository(apiToken, requests, base64, logger) {
+function TogglRepository(apiToken, request, base64, logger) {
   this.apiToken = apiToken;
-  this.requests = requests;
+  this.request = request;
   this.base64 = base64;
   this.logger = logger;
 
@@ -50,7 +50,7 @@ function TogglRepository(apiToken, requests, base64, logger) {
       queryString = queryString + "&page=" + page;
     }
     that.logger.log("querystring: " + queryString);
-    var result = that.requests.get(url, queryString, { 'Authorization': digest });
+    var result = that.request.get(url, queryString, { 'Authorization': digest });
     return result;
   }
 }

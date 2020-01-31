@@ -1,5 +1,5 @@
 
-function Requests() {
+function Request() {
   this.get = function(url, queryString, headers) {
     var response = UrlFetchApp.fetch(url + "?" + queryString, {
       method: "get",

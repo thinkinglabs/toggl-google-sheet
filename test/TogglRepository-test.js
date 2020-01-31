@@ -1,7 +1,7 @@
 
 QUnit.module('ToggleRepository', function() {
 
-  function MockRequests(result) {
+  function MockRequest(result) {
     this.get = function(url, queryString, headers) {
       return result;
     };
@@ -18,7 +18,7 @@ QUnit.module('ToggleRepository', function() {
   QUnit.test("detailedReport - pagination", function( assert ) {
     var apiToken = 12345;
   
-    var togglRepository = new TogglRepository(apiToken, new MockRequests({
+    var togglRepository = new TogglRepository(apiToken, new MockRequest({
       total_count: 3,
       per_page: 1,
       data: [

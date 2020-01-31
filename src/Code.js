@@ -16,7 +16,7 @@ function getTimesheetForMonth() {
   var renderer = new TimesheetRenderer(
     new FetchTimesheet(
       new Logging('FetchTimesheet'), 
-      new TogglRepository(config.apiToken, new Requests(), new Base64(), new Logging('TogglRepository'))
+      new TogglRepository(config.apiToken, new Request(), new Base64(), new Logging('TogglRepository'))
     )
   );
   renderer.render(config.workspaceId, timesheetDate);
