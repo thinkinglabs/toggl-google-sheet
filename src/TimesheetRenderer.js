@@ -1,3 +1,4 @@
+import { formatYYYYMM, millisToDuration, millisToDecimalHours } from './Dates.js';
 
 function TimesheetRenderer(fetchTimesheet) {
 
@@ -59,3 +60,5 @@ function TimesheetRenderer(fetchTimesheet) {
     sheet.autoResizeColumn(5);
   };
 }
+
+export { TimesheetRenderer };

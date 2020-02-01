@@ -28,3 +28,5 @@ function ReadConfiguration(spreadSheet, logger) {
     return result
   };
 }
+
+export { ReadConfiguration };

@@ -42,6 +42,13 @@ It also calculates the number of days worked during that month.
 
 Google App Scripts only supports EcmaScript 5.
 
+Webpack and Babel are used to allow the use of EcmaScript2015 (aka ES6).
+
+- `./src/Code.js` : directly exposed to Apps Script, contains the global functions required
+  by Google Apps Script.
+- `./src/App.js` : webpack bundle entry point. Here we can use ES6 modules. The bundle is
+  exposed as a global variable `app` to `Code.js`.
+
 ## Run tests
 
 To run the tests:
@@ -51,21 +58,23 @@ npm install
 npm test
 ```
 
-Tests are implemented using [QUnit](https://qunitjs.com/) and [Jest](https://jestjs.io/en/).
+Tests are implemented using [QUnit](https://qunitjs.com/). Since the introduction of ES6, the QUnit
+tests do not work anymore. They are gradually being rewritten using [Jest](https://jestjs.io/en/).
 
 **WIP** QUnit will gradually be replaced by Jest.
 
-In order to use NodeJS based unit test frameworks and still be Google Apps Script compatible, the following hack
-will be introduced for each NodeJS module.
+`test/fixture.html` was used by QUnit to load all the code and test code. The tests were executed inside a headless PhantomJS browser.
 
-```JavaScript
-if (typeof module !== "undefined" && module.exports) {
-  module.exports.firstDayOfMonth = firstDayOfMonth;
-}
+## Build
+
+To transpile the ES6 to ES5 for Google Apps Script:
+
+```bash
+npm run build
 ```
-
-`test/fixture.html` loads all the code and test code. The tests are executed inside a headless PhantomJS browser.
 
 ## Acknowledgment
 
-Credits go to [koen-github](https://github.com/koen-github) which provided an example on how to use the Toggl API with Google Sheet.
+[koen-github](https://github.com/koen-github) for providing an example on how to use the Toggl API with Google Sheet.
+
+[GSmart.in](https://github.com/gsmart-in) for providing an [example of using ES6 and webpack/babel for Google Apps Script](https://github.com/gsmart-in/AppsCurryStep2). See also [Creating a complete web app on Google Apps Script using Google Sheet as database](https://dev.to/prasanthmj/creating-a-complete-web-app-on-google-apps-script-using-google-sheet-as-database-26o8).

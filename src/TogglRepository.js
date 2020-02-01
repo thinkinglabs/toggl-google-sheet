@@ -1,10 +1,12 @@
+import { parseISODateTime } from './Dates.js';
+
 function TimeEntry(client, startDate, duration) {
   this.client = client;
   this.startDate = startDate;
   this.duration = duration;
 }
 
-function TogglRepository(apiToken, request, base64, logger) {
+var TogglRepository = function(apiToken, request, base64, logger) {
   this.apiToken = apiToken;
   this.request = request;
   this.base64 = base64;
@@ -55,3 +57,4 @@ function TogglRepository(apiToken, request, base64, logger) {
   }
 }
 
+export { TogglRepository };

@@ -28,13 +28,13 @@ var lastDayOfMonth = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), days);
 }
 
-function millisToDuration(millis) {
+var millisToDuration = function(millis) {
     var t = new Date(1970, 0, 1);
     t.setMilliseconds(millis);
     return t.toTimeString().substr(0, 8);
 }
 
-function millisToDecimalHours(millis) {
+var millisToDecimalHours = function(millis) {
   return millis / 1000 / 60 / 60;
 }
 
@@ -84,22 +84,4 @@ function padStart(str, targetLength, padchar) {
   return (pad + str).slice(-pad.length);
 }
 
-// https://www.openmymind.net/2012/2/3/Node-Require-and-Exports/
-// https://tech.holidayextras.com/bridging-the-gap-with-google-app-script-acfc74b4ea3c
-// https://stackoverflow.com/questions/4224606/how-to-check-whether-a-script-is-running-under-node-js
-if (typeof module !== "undefined" && module.exports) {
-  // in nodejs
-  console.log("[Dates] NodeJS: true");
-  module.exports.firstDayOfMonth = firstDayOfMonth;
-  module.exports.lastDayOfMonth = lastDayOfMonth;
-  module.exports.daysInMonth = daysInMonth;
-  module.exports.parseISODateTime = parseISODateTime;
-  module.exports.formatISODate = formatISODate;
-  module.exports.formatYYYYMM = formatYYYYMM;
-} else {
-  if (typeof SpreadsheetApp === 'undefined') {
-    console.log("[Dates] NodeJS: false - AppScript: false");
-  } else {
-    new Logging("Dates").log("NodeJS: false - AppScript: true");
-  }
-}
+export { firstDayOfMonth, lastDayOfMonth, daysInMonth, millisToDuration, millisToDecimalHours, parseISODateTime, formatISODate, formatYYYYMM };

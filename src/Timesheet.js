@@ -101,3 +101,5 @@ function TimesheetDayEntry(date, clients) {
     return _clients[client];
   }
 }
+
+export { Timesheet };

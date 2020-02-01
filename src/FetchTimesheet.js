@@ -1,3 +1,5 @@
+import { Timesheet } from './Timesheet.js';
+import { firstDayOfMonth, lastDayOfMonth, formatISODate } from './Dates.js';
 
 function FetchTimesheet(logger, togglRepository) {
   var that = this;
@@ -31,3 +33,5 @@ function FetchTimesheet(logger, togglRepository) {
     return timesheet;
   };
 }
+
+export { FetchTimesheet };

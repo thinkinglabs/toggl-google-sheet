@@ -1,5 +1,5 @@
 
-function Request() {
+var Request = function() {
   this.get = function(url, queryString, headers) {
     var response = UrlFetchApp.fetch(url + "?" + queryString, {
       method: "get",
@@ -12,13 +12,13 @@ function Request() {
   }
 }
 
-function Base64() {
+var Base64 = function() {
   this.encode = function(text) {
     return Utilities.base64Encode(text);
   }
 }
 
-function Logging(module) {
+var Logging = function(module) {
   this.module = module;
 
   this.log = function(text) {
@@ -30,3 +30,5 @@ function Logging(module) {
     Logger.log(logline);
   };
 }
+
+export { Request, Base64, Logging };
