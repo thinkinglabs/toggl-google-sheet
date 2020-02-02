@@ -1,3 +1,4 @@
+import { padStart } from './Strings.js';
 
 Date.prototype.equals = function(other) {
   if (!other) return false;
@@ -76,12 +77,6 @@ var parseISODateTime = function(isoDateTime) {
   } catch(e){
     return;
   }
-}
-
-function padStart(str, targetLength, padchar) {
-  var pad_char = typeof padchar !== 'undefined' ? padchar : '0';
-  var pad = new Array(1 + targetLength).join(pad_char);
-  return (pad + str).slice(-pad.length);
 }
 
 export { firstDayOfMonth, lastDayOfMonth, daysInMonth, millisToDuration, millisToDecimalHours, parseISODateTime, formatISODate, formatYYYYMM };

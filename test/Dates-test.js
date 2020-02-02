@@ -34,15 +34,3 @@ QUnit.module('Dates', function() {
 
 });
 
-QUnit.module('String', function() {
-
-  QUnit.test('padStart - 5 -> 05', function( assert ) {
-    assert.equal(padStart(5, 2), '05', 'Passed!');
-  });
-
-  QUnit.test('padStart - 31 -> 31', function( assert ) {
-    assert.equal(padStart(31, 2), '31', 'Passed!');
-  });
-
-});
-
