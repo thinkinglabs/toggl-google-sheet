@@ -16,7 +16,7 @@ var TogglRepository = function(apiToken, request, base64, logger) {
 
   this.detailedReport = function (workspaceId, since, until) {
 
-    result = [];
+    var result = [];
   
     var report = fetchReport(workspaceId, since, until);
   
@@ -57,4 +57,4 @@ var TogglRepository = function(apiToken, request, base64, logger) {
   }
 }
 
-export { TogglRepository };
+export { TogglRepository, TimeEntry };
