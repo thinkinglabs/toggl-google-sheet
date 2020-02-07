@@ -18,16 +18,14 @@ QUnit.module('Dates', function() {
     });
 
     QUnit.test('when other has same values return true', function( assert ) {
-      //REMARK: timezone offsets are evaluated at construction time by offsetting the hours
       var actual = new Date("2019-05-13T17:09:11.123");
-      var expected = new Date("2019-05-13T17:09:11.123");
+      var expected = new Date(2019, 4, 13, 17, 9, 11, 123);
       assert.ok(actual.equals(expected), 'Passed!');
     });
 
     QUnit.test('when other has different timezone return false', function( assert ) {
-      //REMARK: timezone offsets are evaluated at construction time by offsetting the hours
-      var actual = new Date("2019-05-13T17:09:11.123+0200");
-      var expected = new Date("2019-05-13T17:09:11.123+0100");
+      var actual = new Date("2019-05-13T17:09:11.123Z02:00");
+      var expected = new Date("2019-05-13T17:09:11.123Z00:00");
       assert.notOk(actual.equals(expected), 'Passed!');
     });
   });
