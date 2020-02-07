@@ -42,12 +42,13 @@ It also calculates the number of days worked during that month.
 
 Google App Scripts only supports EcmaScript 5.
 
-Webpack and Babel are used to allow the use of EcmaScript2015 (aka ES6).
+_toggl-google-sheet_ is written in ES6 (aka EcmaScript2015).  Webpack and Babel
+to transpile ES6 to ES5.
 
-- `./src/Code.js` : directly exposed to Apps Script, contains the global functions required
-  by Google Apps Script.
-- `./src/App.js` : webpack bundle entry point. Here we can use ES6 modules. The bundle is
-  exposed as a global variable `app` to `Code.js`.
+- `./src/Code.js` : contains the global functions required by Google Apps Script
+  written in ES5.
+- `./src/App.js` : entry point for Webpack bundle. Here we can use ES6 modules
+  written in ES6. The bundle is exposed as a global variable `app` to `Code.js`.
 
 ## Run tests
 
@@ -58,12 +59,7 @@ npm install
 npm test
 ```
 
-Tests are implemented using [QUnit](https://qunitjs.com/). Since the introduction of ES6, the QUnit
-tests do not work anymore. They are gradually being rewritten using [Jest](https://jestjs.io/en/).
-
-**WIP** QUnit will gradually be replaced by Jest.
-
-`test/fixture.html` was used by QUnit to load all the code and test code. The tests were executed inside a headless PhantomJS browser.
+Tests are implemented using [Jest](https://jestjs.io/en/).
 
 ## Build
 
