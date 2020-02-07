@@ -102,4 +102,4 @@ function TimesheetDayEntry(date, clients) {
   }
 }
 
-export { Timesheet };
+export { Timesheet, TimesheetDayEntry };
