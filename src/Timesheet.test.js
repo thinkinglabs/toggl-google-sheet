@@ -70,15 +70,6 @@ describe('TimesheetDayEntry', () => {
     expect(iterator.next().done).toBeTruthy();
   });
 
-  //TODO should we keep the equals implementation
-  describe('equals', () => {
-
-    test('when other is undefined return false', () => {
-      expect(new TimesheetDayEntry().equals(undefined)).toBeFalsy();
-    });
-
-  });
-
 });
 
 describe('Timesheet', () => {
