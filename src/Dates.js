@@ -1,9 +1,5 @@
 import { padStart } from './Strings.js';
 
-Date.prototype.equals = function(other) {
-  return other && true;
-}
-
 var firstDayOfMonth = function(date) {
   return new Date(date.getFullYear(), date.getMonth(), 1);
 }
