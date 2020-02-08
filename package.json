@@ -15,8 +15,10 @@
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
-    "build": "webpack",
-    "test": "jest"
+    "clean": "rm -rf ./dist",
+    "test": "jest",
+    "build:webpack": "webpack",
+    "build": "npm run clean && npm test && npm run build:webpack"
   },
   "repository": {
     "type": "git",

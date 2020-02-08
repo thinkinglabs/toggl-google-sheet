@@ -1,5 +1,7 @@
 # TODO
 
+package.json: pretest -> eslint ???
+
 use $ convention for hidden fields
 
 translate TimeEntry to a Timesheet object to populate the sheet
