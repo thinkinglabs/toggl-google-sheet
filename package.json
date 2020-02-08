@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.8.4",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
+    "clasp": "^1.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "jest": "^25.1.0",
     "webpack": "^4.41.5",
@@ -18,7 +19,8 @@
     "clean": "rm -rf ./dist",
     "test": "jest",
     "build:webpack": "webpack",
-    "build": "npm run clean && npm test && npm run build:webpack"
+    "build": "npm run clean && npm test && npm run build:webpack",
+    "push": "npm run build && clasp push"
   },
   "repository": {
     "type": "git",
