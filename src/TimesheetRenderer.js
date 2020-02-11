@@ -1,6 +1,6 @@
 import { formatYYYYMM, millisToDuration, millisToDecimalHours } from './Dates.js';
 
-function TimesheetRenderer(fetchTimesheet) {
+function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
   this.fetchTimesheet = fetchTimesheet;
 
@@ -8,15 +8,14 @@ function TimesheetRenderer(fetchTimesheet) {
 
     var timesheet = this.fetchTimesheet.execute(workspaceId, timesheetDate);
 
-    var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
     var sheetName = formatYYYYMM(timesheetDate);
 
-    var sheet = activeSpreadsheet.getSheetByName(sheetName);
+    var sheet = googleSheetAdapter.activeSpreadsheet.getSheetByName(sheetName);
     if (sheet) {
-      activeSpreadsheet.deleteSheet(sheet);
+      googleSheetAdapter.activeSpreadsheet.deleteSheet(sheet);
     }
 
-    var sheet = activeSpreadsheet.insertSheet(sheetName, activeSpreadsheet.getSheets().length);
+    var sheet = googleSheetAdapter.activeSpreadsheet.insertSheet(sheetName, googleSheetAdapter.activeSpreadsheet.getSheets().length);
 
     var titles = sheet.getRange(1, 1, 1, 3);
     titles.setValues([["Date", "Customer", "Duration"]]);
