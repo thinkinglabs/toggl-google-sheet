@@ -10,13 +10,8 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     var sheetName = formatYYYYMM(timesheetDate);
 
-    var sheet = googleSheetAdapter.activeSpreadsheet.getSheetByName(sheetName);
-    if (sheet) {
-      googleSheetAdapter.activeSpreadsheet.deleteSheet(sheet);
-    }
-
-    var sheet = googleSheetAdapter.activeSpreadsheet.insertSheet(sheetName, googleSheetAdapter.activeSpreadsheet.getSheets().length);
-
+    var sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
+    
     var titles = sheet.getRange(1, 1, 1, 3);
     titles.setValues([["Date", "Customer", "Duration"]]);
     titles.setFontWeights([["bold", "bold", "bold"]]);
