@@ -1,6 +1,6 @@
 
 
-var GoogleSheetAdapter = function() {
+var GoogleSpreadsheetAdapter = function() {
 
   const _activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
 
@@ -16,4 +16,4 @@ var GoogleSheetAdapter = function() {
 
 };
 
-export { GoogleSheetAdapter };
+export { GoogleSpreadsheetAdapter };

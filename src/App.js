@@ -1,5 +1,5 @@
 import { TimesheetRenderer } from './TimesheetRenderer.js';
-import { GoogleSheetAdapter } from './GoogleSheetAdapter.js';
+import { GoogleSpreadsheetAdapter } from './GoogleSheetAdapter.js';
 import { FetchTimesheet } from './FetchTimesheet.js';
 import { TogglRepository } from './TogglRepository.js';
 import { ReadConfiguration } from './ReadConfiguration.js';
@@ -16,7 +16,7 @@ var getTimesheetForMonth = function() {
     new FetchTimesheet(
       new Logging('FetchTimesheet'), 
       new TogglRepository(config.apiToken, new Request(), new Base64(), new Logging('TogglRepository'))
-    ), new GoogleSheetAdapter()
+    ), new GoogleSpreadsheetAdapter()
   );
   renderer.render(config.workspaceId, timesheetDate);
 }
