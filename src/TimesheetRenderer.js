@@ -12,11 +12,11 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     var sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
     
-    var titles = sheet.getRange(1, 1, 1, 3);
+    var titles = sheet.sheet.getRange(1, 1, 1, 3);
     titles.setValues([["Date", "Customer", "Duration"]]);
     titles.setFontWeights([["bold", "bold", "bold"]]);
 
-    var mc = sheet.getRange(2, 5);
+    var mc = sheet.sheet.getRange(2, 5);
     mc.setValue("#MC");
     mc.setFontWeight("bold");
 
@@ -36,8 +36,8 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         var duration = millisToDuration(item.value.duration);
         durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
 
-        sheet.getRange(row, 1, 1, 3).setValues([[start, item.value.clientName, duration]]);
-        sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+        sheet.sheet.getRange(row, 1, 1, 3).setValues([[start, item.value.clientName, duration]]);
+        sheet.sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
         ++row;
       }
 
@@ -46,12 +46,12 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
       }
     }
 
-    sheet.getRange(2,6).setValue(numberOfMealVouchers);
+    sheet.sheet.getRange(2,6).setValue(numberOfMealVouchers);
 
-    sheet.autoResizeColumn(1);
-    sheet.autoResizeColumn(2);
-    sheet.autoResizeColumn(3);
-    sheet.autoResizeColumn(5);
+    sheet.sheet.autoResizeColumn(1);
+    sheet.sheet.autoResizeColumn(2);
+    sheet.sheet.autoResizeColumn(3);
+    sheet.sheet.autoResizeColumn(5);
   };
 }
 

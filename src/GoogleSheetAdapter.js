@@ -1,5 +1,4 @@
 
-
 var GoogleSpreadsheetAdapter = function() {
 
   const _activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -11,9 +10,13 @@ var GoogleSpreadsheetAdapter = function() {
     }
 
     var sheet = _activeSpreadsheet.insertSheet(sheetName, _activeSpreadsheet.getSheets().length);
-    return sheet;
+    return new GoogleSheetAdapter(sheet);
   }
 
 };
 
-export { GoogleSpreadsheetAdapter };
+var GoogleSheetAdapter = function(sheet) {
+  this.sheet = sheet;
+}
+
+export { GoogleSpreadsheetAdapter, GoogleSheetAdapter };
