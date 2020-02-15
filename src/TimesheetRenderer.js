@@ -12,10 +12,8 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     var sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
     
-    var titles = sheet.sheet.getRange(1, 1, 1, 3);
-    titles.setValues([["Date", "Customer", "Duration"]]);
-    titles.setFontWeights([["bold", "bold", "bold"]]);
-
+    sheet.renderTitles([["Date", "Customer", "Duration"]])
+    
     var mc = sheet.sheet.getRange(2, 5);
     mc.setValue("#MC");
     mc.setFontWeight("bold");
