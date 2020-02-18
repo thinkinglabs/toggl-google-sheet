@@ -38,11 +38,13 @@ var GoogleSheetAdapter = function(sheet) {
   }
 
   this.renderDaysWorked = function(numberOfDaysWorked) {
-    const title = _sheet.getRange(2, 5);
+    const column = 5;
+    const title = _sheet.getRange(2, column);
     title.setValue("#Days Worked");
     title.setFontWeight("bold");
-    _sheet.getRange(2, 6).setValue(numberOfDaysWorked);
-    _sheet.autoResizeColumn(5);
+    _sheet.getRange(2, column + 1).setValue(numberOfDaysWorked);
+    _sheet.autoResizeColumn(column);
+    _sheet.autoResizeColumn(column + 1);
   }
 }
 
