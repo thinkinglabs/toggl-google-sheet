@@ -18,7 +18,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
     mc.setValue("#MC");
     mc.setFontWeight("bold");
 
-    var numberOfMealVouchers = 0;
+    var numberOfDaysWorked = 0;
     var row = 2
 
     var timesheetIterator = timesheet.iterator();
@@ -39,11 +39,11 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
       }
 
       if (durationInHours >= 2) {
-        ++numberOfMealVouchers;
+        ++numberOfDaysWorked;
       }
     }
 
-    sheet.sheet.getRange(2,6).setValue(numberOfMealVouchers);
+    sheet.sheet.getRange(2,6).setValue(numberOfDaysWorked);
 
     sheet.sheet.autoResizeColumn(1);
     sheet.sheet.autoResizeColumn(2);
