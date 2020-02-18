@@ -16,27 +16,33 @@ var GoogleSpreadsheetAdapter = function() {
 };
 
 var GoogleSheetAdapter = function(sheet) {
-  this.sheet = sheet;
+  const _sheet = sheet;
 
   this.renderTitles = function(...titles) {
     const numColumns = titles.length
-    var titlesRange = sheet.getRange(1, 1, 1, numColumns);
+    var titlesRange = _sheet.getRange(1, 1, 1, numColumns);
     titlesRange.setValues([titles]);
     titlesRange.setFontWeights([["bold", "bold", "bold"]]);
   }
 
   this.renderRow = function(row, ...values) {
     const numColumns = values.length;
-    sheet.getRange(row, 1, 1, numColumns).setValues([values]);
-    sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+    _sheet.getRange(row, 1, 1, numColumns).setValues([values]);
+    _sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+  }
+
+  this.autoResizeColumns = function() {
+    _sheet.autoResizeColumn(1);
+    _sheet.autoResizeColumn(2);
+    _sheet.autoResizeColumn(3);
   }
 
   this.renderDaysWorked = function(numberOfDaysWorked) {
-    const title = sheet.getRange(2, 5);
+    const title = _sheet.getRange(2, 5);
     title.setValue("#Days Worked");
     title.setFontWeight("bold");
-    sheet.getRange(2,6).setValue(numberOfDaysWorked);
-    sheet.autoResizeColumn(5);
+    _sheet.getRange(2, 6).setValue(numberOfDaysWorked);
+    _sheet.autoResizeColumn(5);
   }
 }
 

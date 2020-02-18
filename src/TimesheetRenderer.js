@@ -38,12 +38,9 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         ++numberOfDaysWorked;
       }
     }
+    sheet.autoResizeColumns();
 
     sheet.renderDaysWorked(numberOfDaysWorked);
-
-    sheet.sheet.autoResizeColumn(1);
-    sheet.sheet.autoResizeColumn(2);
-    sheet.sheet.autoResizeColumn(3);
   };
 }
 
