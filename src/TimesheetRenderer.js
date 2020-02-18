@@ -38,11 +38,8 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         ++numberOfDaysWorked;
       }
     }
-    
-    var mc = sheet.sheet.getRange(2, 5);
-    mc.setValue("#MC");
-    mc.setFontWeight("bold");
-    sheet.sheet.getRange(2,6).setValue(numberOfDaysWorked);
+
+    sheet.renderDaysWorked(numberOfDaysWorked);
 
     sheet.sheet.autoResizeColumn(1);
     sheet.sheet.autoResizeColumn(2);

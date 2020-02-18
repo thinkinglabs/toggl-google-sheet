@@ -30,6 +30,13 @@ var GoogleSheetAdapter = function(sheet) {
     sheet.getRange(row, 1, 1, numColumns).setValues([values]);
     sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
   }
+
+  this.renderDaysWorked = function(numberOfDaysWorked) {
+    const title = sheet.getRange(2, 5);
+    title.setValue("#MC");
+    title.setFontWeight("bold");
+    sheet.getRange(2,6).setValue(numberOfDaysWorked);
+  }
 }
 
 export { GoogleSpreadsheetAdapter, GoogleSheetAdapter };
