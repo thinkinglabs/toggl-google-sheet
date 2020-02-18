@@ -12,7 +12,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     var sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
     
-    sheet.renderTitles([["Date", "Customer", "Duration"]])
+    sheet.renderTitles("Date", "Customer", "Duration")
     
     var mc = sheet.sheet.getRange(2, 5);
     mc.setValue("#MC");

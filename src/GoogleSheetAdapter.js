@@ -18,9 +18,10 @@ var GoogleSpreadsheetAdapter = function() {
 var GoogleSheetAdapter = function(sheet) {
   this.sheet = sheet;
 
-  this.renderTitles = function(titles) {
-    var titlesRange = sheet.getRange(1, 1, 1, 3);
-    titlesRange.setValues(titles);
+  this.renderTitles = function(...titles) {
+    const numColumns = titles.length
+    var titlesRange = sheet.getRange(1, 1, 1, numColumns);
+    titlesRange.setValues([titles]);
     titlesRange.setFontWeights([["bold", "bold", "bold"]]);
   }
 }
