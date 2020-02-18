@@ -44,7 +44,6 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
     sheet.sheet.autoResizeColumn(1);
     sheet.sheet.autoResizeColumn(2);
     sheet.sheet.autoResizeColumn(3);
-    sheet.sheet.autoResizeColumn(5);
   };
 }
 

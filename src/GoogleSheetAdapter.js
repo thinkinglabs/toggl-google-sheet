@@ -33,9 +33,10 @@ var GoogleSheetAdapter = function(sheet) {
 
   this.renderDaysWorked = function(numberOfDaysWorked) {
     const title = sheet.getRange(2, 5);
-    title.setValue("#MC");
+    title.setValue("#Days Worked");
     title.setFontWeight("bold");
     sheet.getRange(2,6).setValue(numberOfDaysWorked);
+    sheet.autoResizeColumn(5);
   }
 }
 
