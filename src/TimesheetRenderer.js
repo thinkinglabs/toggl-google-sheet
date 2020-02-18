@@ -14,10 +14,6 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
     
     sheet.renderTitles("Date", "Customer", "Duration")
     
-    var mc = sheet.sheet.getRange(2, 5);
-    mc.setValue("#MC");
-    mc.setFontWeight("bold");
-
     var numberOfDaysWorked = 0;
     var row = 2
 
@@ -42,7 +38,10 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         ++numberOfDaysWorked;
       }
     }
-
+    
+    var mc = sheet.sheet.getRange(2, 5);
+    mc.setValue("#MC");
+    mc.setFontWeight("bold");
     sheet.sheet.getRange(2,6).setValue(numberOfDaysWorked);
 
     sheet.sheet.autoResizeColumn(1);
