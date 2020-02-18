@@ -19,12 +19,13 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     var timesheetIterator = timesheet.iterator();
 
-    for (var timesheetDay = timesheetIterator.next(); !timesheetDay.done; timesheetDay = timesheetIterator.next()) {
-
-      var start = timesheetDay.value.date();
+    for (let timesheetIteratorItem = timesheetIterator.next(); !timesheetIteratorItem.done; timesheetIteratorItem = timesheetIterator.next()) {
+      
+      let timesheetDay = timesheetIteratorItem.value;
+      var start = timesheetDay.date();
       var durationInHours = 0;
 
-      var clientsIterator = timesheetDay.value.iterator();
+      var clientsIterator = timesheetDay.iterator();
 
       for(var item = clientsIterator.next(); !item.done; item = clientsIterator.next()) {
         var duration = millisToDuration(item.value.duration);
