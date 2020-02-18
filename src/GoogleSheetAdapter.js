@@ -24,6 +24,12 @@ var GoogleSheetAdapter = function(sheet) {
     titlesRange.setValues([titles]);
     titlesRange.setFontWeights([["bold", "bold", "bold"]]);
   }
+
+  this.renderRow = function(row, ...values) {
+    const numColumns = values.length;
+    sheet.getRange(row, 1, 1, numColumns).setValues([values]);
+    sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+  }
 }
 
 export { GoogleSpreadsheetAdapter, GoogleSheetAdapter };

@@ -34,8 +34,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         var duration = millisToDuration(item.value.duration);
         durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
 
-        sheet.sheet.getRange(row, 1, 1, 3).setValues([[start, item.value.clientName, duration]]);
-        sheet.sheet.getRange(row, 1).setNumberFormat("dd/MM/yyyy")
+        sheet.renderRow(row, start, item.value.clientName, duration);
         ++row;
       }
 
