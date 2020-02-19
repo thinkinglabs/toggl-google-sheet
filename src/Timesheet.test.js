@@ -88,6 +88,7 @@ describe('Timesheet', () => {
     expect(JSON.stringify(timesheet.timesheet())).toBe(JSON.stringify(expected));
   });
 
+  //TODO use Given-When-Then: given a timesheet is empty when adding a time entry
   test('when timesheet is empty add a time entry', () => {
     var timesheet = new Timesheet();
 
@@ -119,6 +120,12 @@ describe('Timesheet', () => {
     var expected = [,,,,,new TimesheetDayEntry(new Date(), {aClient:206})];
 
     expect(JSON.stringify(timesheet.timesheet())).toBe(JSON.stringify(expected));
+  });
+
+  test('given an empty timesheet', () => {
+    var timesheet = new Timesheet();
+    
+    expect(timesheet.daysWorked()).toBe(0);
   });
 
   //TODO add describe for iterate

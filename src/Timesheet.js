@@ -15,6 +15,11 @@ function Timesheet(timesheet) {
     return _timesheet;
   };
 
+
+  this.daysWorked = function() {
+    return 0;
+  }
+
   this.iterator = function() {
     var nextIndex = 0;
 
@@ -45,7 +50,6 @@ function Timesheet(timesheet) {
   function get(dayOfMonth) {
     return _timesheet[dayOfMonth];
   }
-
 }
 
 function TimesheetDayEntry(date, clients) {

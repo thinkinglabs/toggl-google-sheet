@@ -22,7 +22,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
     for (let timesheetIteratorItem = timesheetIterator.next(); !timesheetIteratorItem.done; timesheetIteratorItem = timesheetIterator.next()) {
       
       let timesheetDay = timesheetIteratorItem.value;
-      var start = timesheetDay.date();
+      var day = timesheetDay.date();
       var durationInHours = 0;
 
       var clientsIterator = timesheetDay.iterator();
@@ -31,7 +31,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
         var duration = millisToDuration(item.value.duration);
         durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
 
-        sheet.renderRow(row, start, item.value.clientName, duration);
+        sheet.renderRow(row, day, item.value.clientName, duration);
         ++row;
       }
 
