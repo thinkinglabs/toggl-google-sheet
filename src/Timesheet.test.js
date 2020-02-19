@@ -135,6 +135,13 @@ describe('Timesheet', () => {
     expect(timesheet.daysWorked()).toBe(1);
   });
 
+  test('given a timesheet having a time entry with a duration shorter than 2 hours', () => {
+    const not_yet_two_hours = 2*1000*60*60-1;
+    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:not_yet_two_hours})]);
+    
+    expect(timesheet.daysWorked()).toBe(0);
+  });
+
   //TODO add describe for iterate
   test('iterate over empty timesheet', () => {
     var timesheet = new Timesheet();
