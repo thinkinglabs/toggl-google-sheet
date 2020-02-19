@@ -1,3 +1,4 @@
+import { millisToDecimalHours } from './Dates.js';
 
 function Timesheet(timesheet) {
 
@@ -17,7 +18,18 @@ function Timesheet(timesheet) {
 
 
   this.daysWorked = function() {
-    return 0;
+    let numberOfDaysWorked = 0;
+    let durationInHours = 0
+    const iterator = this.iterator();
+    for (let iteratorItem = iterator.next(); !iteratorItem.done; iteratorItem = iterator.next()) {
+      let dayEntry = iteratorItem.value;
+      durationInHours = millisToDecimalHours(dayEntry.clients().aClient);
+    }
+
+    if (durationInHours > 2) {
+      ++numberOfDaysWorked;
+    }
+    return numberOfDaysWorked;
   }
 
   this.iterator = function() {
