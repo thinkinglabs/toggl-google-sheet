@@ -26,7 +26,7 @@ function Timesheet(timesheet) {
       durationInHours = millisToDecimalHours(dayEntry.clients().aClient);
     }
 
-    if (durationInHours > 2) {
+    if (durationInHours >= 2) {
       ++numberOfDaysWorked;
     }
     return numberOfDaysWorked;
