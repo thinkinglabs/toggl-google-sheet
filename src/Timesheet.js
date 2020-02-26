@@ -19,16 +19,11 @@ function Timesheet(timesheet) {
   this.daysWorked = function() {
     let numberOfDaysWorked = 0;
 
-    const timesheetIterator = this.iterator();
-    for (let timesheetIteratorItem = timesheetIterator.next(); !timesheetIteratorItem.done; timesheetIteratorItem = timesheetIterator.next()) {
-      const dayEntry = timesheetIteratorItem.value;
+    const iterator = this.iterator();
+    for (let iteratorItem = iterator.next(); !iteratorItem.done; iteratorItem = iterator.next()) {
+      const dayEntry = iteratorItem.value;
 
-      const clientsIterator = dayEntry.iterator();
-      let durationInHours = 0;
-      for(let clientsIteratorItem = clientsIterator.next(); !clientsIteratorItem.done; clientsIteratorItem = clientsIterator.next()) {
-        const client = clientsIteratorItem.value;
-        durationInHours += millisToDecimalHours(client.duration);
-      }
+      const durationInHours = millisToDecimalHours(dayEntry.duration());
 
       if (durationInHours >= 2) {
         ++numberOfDaysWorked;
