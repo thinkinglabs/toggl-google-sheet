@@ -243,6 +243,16 @@ describe('Timesheet', () => {
       
       expect(timesheet.daysWorked()).toBe(1);
     });
+
+    test('given a timesheet having two day entries each having one client with a day duration of two hours then days worked is two', () => {
+      const two_hours = 2*1000*60*60;
+      var timesheet = new Timesheet([
+        new TimesheetDayEntry(new Date(), {aClientA:two_hours}),
+        new TimesheetDayEntry(new Date(), {aClientB:two_hours})
+      ]);
+      
+      expect(timesheet.daysWorked()).toBe(2);
+    });
   });
   
 });
