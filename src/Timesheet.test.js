@@ -122,59 +122,61 @@ describe('Timesheet', () => {
     expect(JSON.stringify(timesheet.timesheet())).toBe(JSON.stringify(expected));
   });
 
-  //TODO add describe for iterate
-  test('iterate over empty timesheet', () => {
-    var timesheet = new Timesheet();
+  describe("iterator", () => {
 
-    var iterator = timesheet.iterator();
+    test('iterate over empty timesheet', () => {
+      var timesheet = new Timesheet();
 
-    expect(iterator.next().done).toBeTruthy();
-  });
+      var iterator = timesheet.iterator();
 
-  test('iterate over timesheet having one kday', () => {
-    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:5})]);
+      expect(iterator.next().done).toBeTruthy();
+    });
 
-    var iterator = timesheet.iterator();
-    var item = iterator.next();
+    test('iterate over timesheet having one kday', () => {
+      var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:5})]);
 
-    expect(JSON.stringify(item.value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {aClient:5})));
-    expect(item.done).toBeFalsy();
+      var iterator = timesheet.iterator();
+      var item = iterator.next();
 
-    expect(iterator.next().done).toBeTruthy();
-  });
+      expect(JSON.stringify(item.value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {aClient:5})));
+      expect(item.done).toBeFalsy();
 
-  test('iterate over timesheet having two subsequent days', () => {
-    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {clientA:5}), new TimesheetDayEntry(new Date(), {clientB:7})]);
+      expect(iterator.next().done).toBeTruthy();
+    });
 
-    var iterator = timesheet.iterator();
+    test('iterate over timesheet having two subsequent days', () => {
+      var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {clientA:5}), new TimesheetDayEntry(new Date(), {clientB:7})]);
 
-    expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientA:5})));
-    expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientB:7})));
+      var iterator = timesheet.iterator();
 
-    expect(iterator.next().done).toBeTruthy();
-  });
+      expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientA:5})));
+      expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientB:7})));
 
-  test('iterate over timesheet having two non-subsequent days', () => {
-    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {clientA:5}), , new TimesheetDayEntry(new Date(), {clientB:7})]);
+      expect(iterator.next().done).toBeTruthy();
+    });
 
-    var iterator = timesheet.iterator();
+    test('iterate over timesheet having two non-subsequent days', () => {
+      var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {clientA:5}), , new TimesheetDayEntry(new Date(), {clientB:7})]);
 
-    expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientA:5})));
-    expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientB:7})));
+      var iterator = timesheet.iterator();
 
-    expect(iterator.next().done).toBeTruthy();
-  });
+      expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientA:5})));
+      expect(JSON.stringify(iterator.next().value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {clientB:7})));
 
-  test('iterate over timesheet having one non-first day', () => {
-    var timesheet = new Timesheet([,,,new TimesheetDayEntry(new Date(), {aClient:5})]);
+      expect(iterator.next().done).toBeTruthy();
+    });
 
-    var iterator = timesheet.iterator();
-    var item = iterator.next();
+    test('iterate over timesheet having one non-first day', () => {
+      var timesheet = new Timesheet([,,,new TimesheetDayEntry(new Date(), {aClient:5})]);
 
-    expect(JSON.stringify(item.value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {aClient:5})));
-    expect(item.done).toBeFalsy();
+      var iterator = timesheet.iterator();
+      var item = iterator.next();
 
-    expect(iterator.next().done).toBeTruthy();
+      expect(JSON.stringify(item.value)).toBe(JSON.stringify(new TimesheetDayEntry(new Date(), {aClient:5})));
+      expect(item.done).toBeFalsy();
+
+      expect(iterator.next().done).toBeTruthy();
+    });
   });
 
   describe("days worked" ,() => {
