@@ -92,7 +92,13 @@ function TimesheetDayEntry(date, clients) {
   };
 
   this.duration = function() {
-    return 0;
+    let duration = 0;
+    const iterator = this.iterator();
+    for (let iteratorItem = iterator.next(); !iteratorItem.done; iteratorItem = iterator.next()) {
+      const item = iteratorItem.value;
+      duration += item.duration;
+    }
+    return duration;
   }
 
   this.iterator = function() {

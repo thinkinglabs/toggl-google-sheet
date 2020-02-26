@@ -70,10 +70,17 @@ describe('TimesheetDayEntry', () => {
   });
 
   describe("duration", ()=>{
+
     test("given empty day entry than duration is zero", ()=>{
-      let dayEntry = new TimesheetDayEntry();
+      const dayEntry = new TimesheetDayEntry();
       expect(dayEntry.duration()).toBe(0);
     });
+
+    test("given a day entry with client A having duration of 6, client B having duration of 11 and client C having a duration of 1 than duration is 18", ()=>{
+      const dayEntry = new TimesheetDayEntry(new Date(), {clientA:6, clientB:11, clientC:1});
+      expect(dayEntry.duration()).toBe(18);
+    });
+
   });
 
 });
