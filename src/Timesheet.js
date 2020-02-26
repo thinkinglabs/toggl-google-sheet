@@ -91,6 +91,10 @@ function TimesheetDayEntry(date, clients) {
     return _date;
   };
 
+  this.duration = function() {
+    return 0;
+  }
+
   this.iterator = function() {
     var nextIndex = 0;
     

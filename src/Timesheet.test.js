@@ -27,7 +27,7 @@ describe('TimesheetDayEntry', () => {
   test('add client to date entry with different client', () => {
     var dateEntry = new TimesheetDayEntry(new Date(), {clientA:7});
     dateEntry.add('clientB', 5);
-    
+
     expect(dateEntry.clients()).toEqual({clientA: 7, clientB: 5});
   });
 
@@ -66,6 +66,13 @@ describe('TimesheetDayEntry', () => {
       expect(iterator.next().value).toEqual({clientName: 'clientA', duration: 7});
       expect(iterator.next().value).toEqual({clientName: 'clientB', duration: 10});
       expect(iterator.next().done).toBeTruthy();
+    });
+  });
+
+  describe("duration", ()=>{
+    test("given empty day entry than duration is zero", ()=>{
+      let dayEntry = new TimesheetDayEntry();
+      expect(dayEntry.duration()).toBe(0);
     });
   });
 
