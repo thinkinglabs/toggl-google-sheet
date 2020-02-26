@@ -128,14 +128,14 @@ describe('Timesheet', () => {
     expect(timesheet.daysWorked()).toBe(0);
   });
 
-  test('given a timesheet having a time entry with a duration longer than 2 hours', () => {
+  test('given a timesheet having a time entry with a duration of more than 2 hours', () => {
     const three_hours = 3*1000*60*60;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:three_hours})]);
     
     expect(timesheet.daysWorked()).toBe(1);
   });
 
-  test('given a timesheet having a time entry with a duration shorter than 2 hours', () => {
+  test('given a timesheet having a time entry with a duration of less than 2 hours', () => {
     const not_yet_two_hours = 2*1000*60*60-1;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:not_yet_two_hours})]);
     
@@ -145,6 +145,22 @@ describe('Timesheet', () => {
   test('given a timesheet having a time entry with a duration of 2 hours', () => {
     const two_hours = 2*1000*60*60;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:two_hours})]);
+    
+    expect(timesheet.daysWorked()).toBe(1);
+  });
+
+  test('given a timesheet having one day entry having two clients with a total duration of less than 2 hours', () => {
+    const one_hour = 1*1000*60*60;
+    const half_an_hour = one_hour/2;
+    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClientA:one_hour, aClientB: half_an_hour})]);
+    
+    expect(timesheet.daysWorked()).toBe(0);
+  });
+
+  test('given a timesheet having one day entry having two clients with a total duration of more than 2 hours', () => {
+    const one_hour = 1*1000*60*60;
+    const two_hours = one_hour*2;
+    var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClientA:one_hour, aClientB: two_hours})]);
     
     expect(timesheet.daysWorked()).toBe(1);
   });
