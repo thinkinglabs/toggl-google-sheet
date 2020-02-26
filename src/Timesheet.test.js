@@ -40,34 +40,35 @@ describe('TimesheetDayEntry', () => {
     expect(dateEntry.clients()).toEqual({aClient: 12});
   });
 
-  //TODO add describe for iterate
-  test('iterate over empty day entry', () => {
-    var dateEntry = new TimesheetDayEntry();
-    var iterator = dateEntry.iterator();
-    var actual = iterator.next();
+  describe("iterator", ()=>{  
+    test('iterate over empty day entry', () => {
+      var dateEntry = new TimesheetDayEntry();
+      var iterator = dateEntry.iterator();
+      var actual = iterator.next();
 
-    expect(actual.value).toBeUndefined();
-    expect(actual.done).toBeTruthy();
-  });
+      expect(actual.value).toBeUndefined();
+      expect(actual.done).toBeTruthy();
+    });
 
-  test('iterate over one client', () => {
-    var dateEntry = new TimesheetDayEntry(new Date(), {aClient:7});
-    var iterator = dateEntry.iterator();
-    var actual = iterator.next();
+    test('iterate over one client', () => {
+      var dateEntry = new TimesheetDayEntry(new Date(), {aClient:7});
+      var iterator = dateEntry.iterator();
+      var actual = iterator.next();
 
-    expect(actual.value).toEqual({clientName: 'aClient', duration: 7});
-    expect(actual.done).toBeFalsy();
+      expect(actual.value).toEqual({clientName: 'aClient', duration: 7});
+      expect(actual.done).toBeFalsy();
 
-    expect(iterator.next().done).toBeTruthy();
-  });
+      expect(iterator.next().done).toBeTruthy();
+    });
 
-  test('iterate over two clients', () => {
-    var dateEntry = new TimesheetDayEntry(new Date(), {clientA:7, clientB:10});
-    var iterator = dateEntry.iterator();
+    test('iterate over two clients', () => {
+      var dateEntry = new TimesheetDayEntry(new Date(), {clientA:7, clientB:10});
+      var iterator = dateEntry.iterator();
 
-    expect(iterator.next().value).toEqual({clientName: 'clientA', duration: 7});
-    expect(iterator.next().value).toEqual({clientName: 'clientB', duration: 10});
-    expect(iterator.next().done).toBeTruthy();
+      expect(iterator.next().value).toEqual({clientName: 'clientA', duration: 7});
+      expect(iterator.next().value).toEqual({clientName: 'clientB', duration: 10});
+      expect(iterator.next().done).toBeTruthy();
+    });
   });
 
 });
