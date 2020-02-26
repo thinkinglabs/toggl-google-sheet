@@ -27,9 +27,7 @@ describe('TimesheetDayEntry', () => {
   test('add client to date entry with different client', () => {
     var dateEntry = new TimesheetDayEntry(new Date(), {clientA:7});
     dateEntry.add('clientB', 5);
-
-    var expected = new TimesheetDayEntry(new Date(), {clientA:7,clientB:5});
-
+    
     expect(dateEntry.clients()).toEqual({clientA: 7, clientB: 5});
   });
 
