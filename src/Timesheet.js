@@ -18,22 +18,23 @@ function Timesheet(timesheet) {
 
   this.daysWorked = function() {
     let numberOfDaysWorked = 0;
-    let durationInHours = 0
 
     const timesheetIterator = this.iterator();
     for (let timesheetIteratorItem = timesheetIterator.next(); !timesheetIteratorItem.done; timesheetIteratorItem = timesheetIterator.next()) {
       const dayEntry = timesheetIteratorItem.value;
 
       const clientsIterator = dayEntry.iterator();
+      let durationInHours = 0;
       for(let clientsIteratorItem = clientsIterator.next(); !clientsIteratorItem.done; clientsIteratorItem = clientsIterator.next()) {
         const client = clientsIteratorItem.value;
         durationInHours += millisToDecimalHours(client.duration);
       }
+
+      if (durationInHours >= 2) {
+        ++numberOfDaysWorked;
+      }
     }
 
-    if (durationInHours >= 2) {
-      ++numberOfDaysWorked;
-    }
     return numberOfDaysWorked;
   }
 

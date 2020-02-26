@@ -135,21 +135,21 @@ describe('Timesheet', () => {
     expect(timesheet.daysWorked()).toBe(1);
   });
 
-  test('given a timesheet having a time entry with a duration of less than 2 hours', () => {
+  test('given a timesheet having a time entry with a duration of less than 2 hours then days worked is zero', () => {
     const not_yet_two_hours = 2*1000*60*60-1;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:not_yet_two_hours})]);
     
     expect(timesheet.daysWorked()).toBe(0);
   });
 
-  test('given a timesheet having a time entry with a duration of 2 hours', () => {
+  test('given a timesheet having a time entry with a duration of 2 hours then days worked is one', () => {
     const two_hours = 2*1000*60*60;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClient:two_hours})]);
     
     expect(timesheet.daysWorked()).toBe(1);
   });
 
-  test('given a timesheet having one day entry having two clients with a total duration of less than 2 hours', () => {
+  test('given a timesheet having one day entry having two clients with a day duration of less than 2 hours then days worked is zero', () => {
     const one_hour = 1*1000*60*60;
     const half_an_hour = one_hour/2;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClientA:one_hour, aClientB: half_an_hour})]);
@@ -157,12 +157,22 @@ describe('Timesheet', () => {
     expect(timesheet.daysWorked()).toBe(0);
   });
 
-  test('given a timesheet having one day entry having two clients with a total duration of more than 2 hours', () => {
+  test('given a timesheet having one day entry having two clients with a day duration of more than 2 hours then days worked is one', () => {
     const one_hour = 1*1000*60*60;
     const two_hours = one_hour*2;
     var timesheet = new Timesheet([new TimesheetDayEntry(new Date(), {aClientA:one_hour, aClientB: two_hours})]);
     
     expect(timesheet.daysWorked()).toBe(1);
+  });
+
+  test('given a timesheet having two day entries each having one client with a day duration of less than 2 hours then days worked is zero', () => {
+    const one_hour = 1*1000*60*60;
+    var timesheet = new Timesheet([
+      new TimesheetDayEntry(new Date(), {aClientA:one_hour}),
+      new TimesheetDayEntry(new Date(), {aClientB:one_hour})
+    ]);
+    
+    expect(timesheet.daysWorked()).toBe(0);
   });
 
   //TODO add describe for iterate
