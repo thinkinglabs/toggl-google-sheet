@@ -1,4 +1,4 @@
-import { formatYYYYMM, millisToDuration, millisToDecimalHours } from './Dates.js';
+import { formatYYYYMM, millisToDuration } from './Dates.js';
 
 function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
@@ -6,42 +6,35 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
   this.render = function(workspaceId, timesheetDate) {
 
-    var timesheet = this.fetchTimesheet.execute(workspaceId, timesheetDate);
+    const timesheet = this.fetchTimesheet.execute(workspaceId, timesheetDate);
 
-    var sheetName = formatYYYYMM(timesheetDate);
+    const sheetName = formatYYYYMM(timesheetDate);
 
-    var sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
+    const sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
     
     sheet.renderTitles("Date", "Customer", "Duration")
     
-    var numberOfDaysWorked = 0;
-    var row = 2
+    let row = 2
 
-    var timesheetIterator = timesheet.iterator();
+    const timesheetIterator = timesheet.iterator();
 
     for (let timesheetIteratorItem = timesheetIterator.next(); !timesheetIteratorItem.done; timesheetIteratorItem = timesheetIterator.next()) {
       
       let timesheetDay = timesheetIteratorItem.value;
-      var day = timesheetDay.date();
-      var durationInHours = 0;
+      const day = timesheetDay.date();
 
-      var clientsIterator = timesheetDay.iterator();
+      const clientsIterator = timesheetDay.iterator();
 
-      for(var item = clientsIterator.next(); !item.done; item = clientsIterator.next()) {
-        var duration = millisToDuration(item.value.duration);
-        durationInHours = durationInHours + millisToDecimalHours(item.value.duration);
+      for(let item = clientsIterator.next(); !item.done; item = clientsIterator.next()) {
+        const duration = millisToDuration(item.value.duration);
 
         sheet.renderRow(row, day, item.value.clientName, duration);
         ++row;
       }
-
-      if (durationInHours >= 2) {
-        ++numberOfDaysWorked;
-      }
     }
     sheet.autoResizeColumns();
 
-    sheet.renderDaysWorked(numberOfDaysWorked);
+    sheet.renderDaysWorked(timesheet.daysWorked());
   };
 }
 
