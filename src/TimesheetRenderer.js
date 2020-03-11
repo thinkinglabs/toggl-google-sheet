@@ -1,6 +1,6 @@
 import { formatYYYYMM, millisToDuration } from './Dates.js';
 
-function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
+function TimesheetRenderer(fetchTimesheet, googleSpreadsheetAdapter) {
 
   this.fetchTimesheet = fetchTimesheet;
 
@@ -10,7 +10,7 @@ function TimesheetRenderer(fetchTimesheet, googleSheetAdapter) {
 
     const sheetName = formatYYYYMM(timesheetDate);
 
-    const sheet = googleSheetAdapter.replaceOrAppendSheet(sheetName);
+    const sheet = googleSpreadsheetAdapter.replaceOrAppendSheet(sheetName);
     
     sheet.renderTitles("Date", "Customer", "Duration")
     
