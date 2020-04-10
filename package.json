@@ -13,7 +13,8 @@
     "copy-webpack-plugin": "^5.1.1",
     "jest": "^25.1.0",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "minimist": ">=1.2.3"
   },
   "scripts": {
     "clean": "rm -rf ./dist",
