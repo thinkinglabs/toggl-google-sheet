@@ -10,11 +10,11 @@
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "clasp": "^1.0.0",
-    "copy-webpack-plugin": "^5.1.1",
+    "copy-webpack-plugin": "^6.0.3",
     "jest": "^25.1.0",
+    "minimist": ">=1.2.3",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "minimist": ">=1.2.3"
+    "webpack-cli": "^3.3.10"
   },
   "scripts": {
     "clean": "rm -rf ./dist",

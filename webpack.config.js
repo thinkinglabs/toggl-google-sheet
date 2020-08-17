@@ -28,9 +28,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyPlugin([
+    new CopyPlugin({ 
+      patterns: [
       './src/Code.js',
       './src/appsscript.json'
-    ])
+      ]
+    })
   ]
 };
