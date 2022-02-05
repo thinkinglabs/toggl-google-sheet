@@ -46,7 +46,7 @@ var TogglRepository = function(apiToken, request, base64, logger) {
     var digest = "Basic " + that.base64.encode(usernamePassword);
     
     
-    var url = "https://www.toggl.com/reports/api/v2/details";
+    var url = "https://api.track.toggl.com/reports/api/v2/details";
     var queryString = "workspace_id=" + workspaceId + "&user_agent=GoogleSheet" + "&since=" + since + "&until=" + until;
     if (page) {
       queryString = queryString + "&page=" + page;
