@@ -12,7 +12,7 @@
     "@google/clasp": "^2.3.0",
     "copy-webpack-plugin": "^6.0.3",
     "jest": "^25.1.0",
-    "minimist": ">=1.2.3",
+    "minimist": ">=1.2.6",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.10"
   },
